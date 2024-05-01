@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SignUp</title>
+  <link rel="stylesheet" href="./signup.component.css">
+</head>
+<body>
+<!-- signup.component.html -->
+<div class="signup-container">
+  <h1>Sign Up</h1>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="nom">Last Name:</label>
+      <input type="text" id="nom" formControlName="nom" placeholder="Enter last name">
+    </div>
+    <div class="form-field">
+      <label for="prenom">First Name:</label>
+      <input type="text" id="prenom" formControlName="prenom" placeholder="Enter first name">
+    </div>
+    <div class="form-field">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" placeholder="Enter email">
+    </div>
+    <div class="form-field">
+      <label for="appointment">Appointment Date:</label>
+      <select formControlName="appointment" id="appointment">
+        <option *ngFor="let appt of appointments" [value]="appt.id">{{ appt.date | date: 'fullDate' }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-signup" [disabled]="!signupForm.valid">Sign Up</button>
+  </form>
+</div>
+</body>
+</html>

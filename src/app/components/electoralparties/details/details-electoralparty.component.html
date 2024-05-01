@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ party.name }}</title>
+  <link rel="stylesheet" href="./details-electoralparty.component.css">
+</head>
+<body>
+<div class="details-container">
+  <h2>Electoral Party Details</h2>
+  <div class="party-details">
+    <h3>{{ party.name }}</h3>
+    <p>{{ party.description }}</p>
+    <button class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
+  </div>
+</div>
+
+</body>
+</html>

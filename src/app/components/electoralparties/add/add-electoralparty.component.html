@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter Partie Eléctoral</title>
+</head>
+<body>
+<!-- add-electoralparty.component.html -->
+<div class="add-electoral-party-container">
+  <h2>Add New Electoral Party</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter electoral party name">
+      <label for="description">Description:</label>
+      <input type="text" id="description" formControlName="description" placeholder="Enter electoral party description">
+    </div>
+    <button type="submit" class="btn btn-submit">Create</button>
+  </form>
+</div>
+</body>
+</html>

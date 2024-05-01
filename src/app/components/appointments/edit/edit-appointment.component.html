@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="./edit-appointment.component.css">
+</head>
+<body>
+<!-- edit-appointment.component.html -->
+<div class="edit-container">
+  <h2>Edit Appointment</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="cni">CNI:</label>
+      <input type="text" id="cni" formControlName="cni">
+    </div>
+    <div class="form-field">
+      <label for="nom">Name:</label>
+      <input type="text" id="nom" formControlName="nom">
+    </div>
+    <div class="form-field">
+      <label for="prenom">Surname:</label>
+      <input type="text" id="prenom" formControlName="prenom">
+    </div>
+    <div class="form-field">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+    </div>
+    <button type="submit" class="submit-btn">Update</button>
+  </form>
+</div>
+
+</body>
+</html>

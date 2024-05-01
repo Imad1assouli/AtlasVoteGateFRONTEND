@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointments</title>
+  <link rel="stylesheet" href="./utilisateur.component.css">
+</head>
+  <body>
+    <!-- utilisateurs.component.html -->
+    <div class="users-container">
+      <h1>Utilisateurs</h1>
+      <button class="btn btn-add" (click)="addUtilisateur()">Add User</button>
+      <table class="users-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>Login</th>
+          <th>Password</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let utilisateur of utilisateurs">
+          <td>{{ utilisateur.id }}</td>
+          <td>{{ utilisateur.nom }}</td>
+          <td>{{ utilisateur.prenom }}</td>
+          <td>{{ utilisateur.login }}</td>
+          <td>{{ utilisateur.password }}</td>
+          <td>
+            <button class="btn btn-edit" routerLink="/edit-user/{{utilisateur.id}}">Edit</button>
+            <button class="btn btn-delete" (click)="onDelete(utilisateur.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+</body>
+</html>

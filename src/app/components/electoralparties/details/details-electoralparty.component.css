@@ -1,0 +1,28 @@
+/* details-electoralparty.component.css */
+.details-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.party-details {
+  margin-top: 20px;
+}
+
+.btn-delete {
+  padding: 10px 20px;
+  color: white;
+  background-color: #ff3b30;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #cc2a25;
+}

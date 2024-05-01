@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointments</title>
+  <link rel="stylesheet" href="./appointment.component.css">
+</head>
+<body>
+<!-- appointment.component.html -->
+<div class="app-container">
+  <h1>Appointments</h1>
+  <button *ngIf="isUserAdmin()" class="btn btn-add" (click)="addAppointment()">Add Appointment</button>
+  <div *ngIf="appointments.length; else noAppointments">
+    <ul class="appointment-list">
+      <li *ngFor="let appointment of appointments">
+        <span>{{ appointment.nom }} {{ appointment.prenom }}</span>
+        <button class="btn btn-edit" (click)="editAppointment(appointment.id)">Edit</button>
+        <button class="btn btn-delete" (click)="deleteAppointment(appointment.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noAppointments>
+    <p>No appointments found.</p>
+  </ng-template>
+</div>
+
+</body>
+</html>
