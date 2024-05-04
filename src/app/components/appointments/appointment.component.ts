@@ -25,7 +25,7 @@ export class AppointmentComponent implements OnInit  {
       next: (appointment) => {
         this.appointment = appointment;
         this.editAppointmentFormGroup  = this.fb.group({
-          cni: this.fb.control(this.appointment.cni),
+          cni: this.fb.control(this.appointment.cne),
           nom: this.fb.control(this.appointment.nom),
           prenom: this.fb.control(this.appointment.prenom),
           email: this.fb.control(this.appointment.email),

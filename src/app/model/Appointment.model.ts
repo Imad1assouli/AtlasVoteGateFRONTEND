@@ -1,8 +1,11 @@
+import { DatePipeConfig } from "@angular/common";
+
 export interface Appointment {
-  id: number
-  cni: string
-  email: string
-  nom: string
-  prenom: string
-  date: Date
+  id: number;
+  cne: string;
+  email: string;
+  password: string;
+  appointmentTime: Date;
+  nom: string;
+  prenom: string;
 }

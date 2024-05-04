@@ -1,80 +1,84 @@
-import {Injectable} from '@angular/core';
-import { Utilisateur } from "../../model/Utilisateur.model";
-
-// @ts-ignore
-import * as uuid from "uuid";
-import {Observable, of, throwError} from "rxjs";
-import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
-import {Role} from "../../enum/Role.enum";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Role } from '../../enum/Role.enum';
+import { Appointment } from '../../model/Appointment.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8080/api/login';
-  constructor(private http: HttpClient) { }
-  users: Utilisateur[] = [];
-  authenticatedUser: Utilisateur | undefined;
+  private baseUrl = 'http://localhost:8080/auth/signin';
+  private baseUrl2 = 'http://localhost:8080/auth/signup';
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
-  public login(login: string, password: string): Observable<Utilisateur> {
-    return this.http.post<Utilisateur>(this.apiUrl, { login, password });
+  constructor(private http: HttpClient, private router: Router) {
+    // Check for token during initialization
+    const token = localStorage.getItem('jwttoken');
+    if (token) {
+      this.loggedIn.next(true);
+    }
   }
 
-  public authenticateUser(appUser: Utilisateur): Observable<boolean> {
-    this.authenticatedUser = appUser;
-    localStorage.setItem("authUser", JSON.stringify({
-      login: appUser.login,
-      password: appUser.password,
-      jwt: "JWT_TOKEN"
-    }))
-    return of(true);
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl, { username, password }).pipe(
+      tap(res => {
+        if (res && res.jwttoken) {
+          localStorage.setItem('jwttoken', res.jwttoken);
+          this.loggedIn.next(true);
+        }
+      })
+    );
   }
 
-  public isAuthenticated(){
-    return this.authenticatedUser!=undefined;
+  logout(): void {
+    localStorage.removeItem('jwttoken');
+    localStorage.removeItem('utilisateur');
+    this.loggedIn.next(false);
+    this.router.navigate(['']);
   }
 
-  public logout(): Observable<boolean>{
-    this.authenticatedUser=undefined;
-    localStorage.removeItem("authUser");
-    return of(true);
+  isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable();
   }
 
-  isLoggedIn() {
-    return false;
+  getToken(): string | null {
+    return localStorage.getItem('jwttoken');
   }
 
-  isUserAdmin() {
-    return this.authenticatedUser?.role === Role.ADMIN;
+  setUser(user: any): void {
+    localStorage.setItem('utilisateur', JSON.stringify(user));
   }
 
-  isUserOfficial() {
-    return this.authenticatedUser?.role === Role.OFFICIAL;
+  getUser(): any {
+    const userStr = localStorage.getItem('utilisateur');
+    return userStr ? JSON.parse(userStr) : null;
   }
 
-  isUserVoteur() {
-    return this.authenticatedUser?.role === Role.VOTEUR;
+  getUserRole(): string {
+    const user = this.getUser();
+    return user ? user.role : '';
   }
 
-  isUserDemandeur() {
-    return this.authenticatedUser?.role === Role.DEMANDEUR;
+  isUserAdmin(): boolean {
+    return this.getUserRole() === Role.ROLE_ADMINISTRATEUR;
   }
 
-  register(value: ɵTypedOrUntyped<any, ɵFormGroupValue<any>, any>) {
-  let appUser: Utilisateur = {
-    nom: value.nom,
-    prenom: value.prenom,
-    id: uuid.v4(),
-    login: value.login,
-    password: value.password,
-    role: Role.DEMANDEUR,
-    // other properties...
-  };
-  this.users.push(appUser);
-  return of(appUser);
+  isUserOfficial(): boolean {
+    return this.getUserRole() === Role.ROLE_FONCTIONNAIRE;
+  }
+
+  isUserVoteur(): boolean {
+    return this.getUserRole() === Role.ROLE_VOTER;
+  }
+
+  isUserDemandeur(): boolean {
+    return this.getUserRole() === Role.ROLE_DEMANDEUR;
+  }
+
+  register(appointment: Appointment): Observable<Object> {
+    return this.http.post(this.baseUrl2, appointment);
+  }
 }
-}
-
-
-// your reply got the crowd yelling woo so b4 u die lets see who can out-petty who

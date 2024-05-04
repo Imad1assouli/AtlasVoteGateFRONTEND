@@ -3,9 +3,9 @@
   <a *ngIf="isUserAdmin()" class="navbar-link" routerLink="/utilisateurs">Users</a>
   <a class="navbar-link" routerLink="/electoralparties">Electoral Parties</a>
   <a *ngIf="isUserAdmin() || isUserOfficial()" class="navbar-link" routerLink="/appointments">Appointments</a>
-  <a *ngIf="!isLoggedIn()" class="navbar-link" routerLink="/signup">Sign Up</a>
-  <a *ngIf="!isLoggedIn()" class="navbar-link" routerLink="/login">Login</a>
-  <a *ngIf="isLoggedIn()" class="navbar-link" routerLink="/logout">Logout</a>
+  <a *ngIf="!(isLoggedIn() | async)" class="navbar-link" routerLink="/signup">Sign Up</a>
+  <a *ngIf="!(isLoggedIn() | async)" class="navbar-link" routerLink="/login">Login</a>
+  <a *ngIf="(isLoggedIn() | async)" (click)="logout()" class="navbar-link" routerLink="/logout">Logout</a>
 </nav>
 <div class="content">
   <router-outlet></router-outlet>

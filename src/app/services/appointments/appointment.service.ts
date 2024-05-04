@@ -9,7 +9,7 @@ import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 })
 
 export class AppointmentService {
-  private backendHost = "http://localhost:8085";
+  private backendHost = "http://localhost:8080";
 
   constructor(private http: HttpClient) {}
 

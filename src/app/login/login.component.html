@@ -4,38 +4,30 @@
   <title>Connexion</title>
 </head>
 <body>
-<section class="background-radial-gradient overflow-hidden">
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
-      <div class="col-lg-6 mb-5 mb-lg-0 text-center" style="z-index: 10">
-        <!-- svg or image placeholder -->
-      </div>
-
-      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
-            <form method="post" action="your-login-processing-url">
-              <div class="text-center mb-4">
-                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
-              </div>
-              <div class="mb-4">
-                <label for="username" class="form-label">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" class="form-control" required>
-              </div>
-              <div class="mb-4">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" id="password" name="password" class="form-control" required>
-              </div>
-              <button class="btn btn-primary" type="submit">Se connecter</button>
-            </form>
-          </div>
+  <div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="../../assets/register.png" alt="" width="100px">
+                </div>
+                <h3 class="text-center">Login Here</h3>
+                <form (ngSubmit)="handleLogin()" #userForm="ngForm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" [(ngModel)]="loginData.username" name="username" id="floatingInput" placeholder="Username" required>
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" [(ngModel)]="loginData.password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" style="width: 120px;">Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
+</div>
 </body>
 </html>

@@ -8,7 +8,7 @@ import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 })
 
 export class ElectoralPartyService {
-  private backendHost = "http://localhost:8085";
+  private backendHost = "http://localhost:8080";
 
   constructor(private http: HttpClient) {
   }
