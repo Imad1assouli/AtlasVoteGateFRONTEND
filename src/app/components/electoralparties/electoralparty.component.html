@@ -14,7 +14,7 @@
   <ul class="electoral-party-list">
     <li *ngFor="let party of parties">
       {{ party.name }}
-      <button class="btn btn-details" routerLink="/details-electoralparty/{{party.id}}">Details</button>
+      <button class="btn btn-details" (click)="viewElectoralPartyDetails(party.id)">Details</button>
     </li>
   </ul>
 </div>

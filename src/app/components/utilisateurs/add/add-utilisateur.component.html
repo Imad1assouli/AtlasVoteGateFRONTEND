@@ -9,31 +9,31 @@
 <!-- add-utilisateur.component.html -->
 <div class="add-user-container">
   <h1>Add New User</h1>
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <form  (ngSubmit)="onSubmit()" #useForm="ngForm">
     <div class="form-field">
       <label for="nom">Nom:</label>
-      <input type="text" id="nom" formControlName="nom" placeholder="Enter last name">
+      <input type="text" id="nom" name="nom" placeholder="Enter last name" [(ngModel)]="utilisateur.nom" required>
     </div>
     <div class="form-field">
       <label for="prenom">Prénom:</label>
-      <input type="text" id="prenom" formControlName="prenom" placeholder="Enter first name">
+      <input type="text" id="prenom" name="prenom" placeholder="Enter first name" [(ngModel)]="utilisateur.prenom" required>
     </div>
     <div class="form-field">
       <label for="login">Nom d'Utilisateur:</label>
-      <input type="text" id="login" formControlName="login" placeholder="Enter login">
+      <input type="text" id="login" name="login" placeholder="Enter login" [(ngModel)]="utilisateur.login" required>
     </div>
     <div class="form-field">
       <label for="password">Mot de Passe:</label>
-      <input type="password" id="password" formControlName="password" placeholder="Enter password">
+      <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="utilisateur.password" required>
     </div>
     <div class="form-field">
-      <label for="role">Role:</label>
-      <select id="role" formControlName="role">
-        <option value="admin">Administrateur</option>
-        <option value="official">Fonctionnaire</option>
+      <label for="role" >Role:</label>
+      <select id="role" name="role" [(ngModel)]="utilisateur.role" required>
+        <option value="ROLE_ADMINISTRATEUR">ROLE_ADMINISTRATEUR</option>
+        <option value="ROLE_FONCTIONNAIRE">ROLE_FONCTIONNAIRE</option>
       </select>
     </div>
-    <button type="submit" class="btn btn-submit">Ajouter</button>
+    <button type="submit" class="btn btn-submit" [disabled]="!useForm.valid">Ajouter</button>
   </form>
 </div>
 

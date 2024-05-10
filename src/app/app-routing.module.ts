@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'appointments/edit', component: EditAppointmentComponent },
   { path: 'parties', component: ElectoralPartyComponent },
   { path: 'electoralparties/add', component: AddElectoralPartyComponent },
-  { path: 'electoralparties/details', component: DetailsElectoralPartyComponent },
+  { path: 'electoralparties/details/:id', component: DetailsElectoralPartyComponent },
   { path: 'utilisateurs', component: UtilisateurComponent },
   { path: 'utilisateurs/add', component: AddUtilisateurComponent },
   { path: '**', redirectTo: '' } // fallback route

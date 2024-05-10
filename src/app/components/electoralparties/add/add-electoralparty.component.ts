@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {ElectoralPartyService} from "../../../services/electoralparties/electoralparty.service";
+import {ElectoralParty} from "../../../model/ElectoralParty.model";
 
 @Component({
   selector: 'app-add-electoral-party',
@@ -9,15 +10,20 @@ import {ElectoralPartyService} from "../../../services/electoralparties/electora
   styleUrls: ['./add-electoralparty.component.css']
 })
 export class AddElectoralPartyComponent implements OnInit {
-  addForm: FormGroup;
-  electoralparty: any;
+  addElectoralParty: FormGroup;
+  electoralparty: ElectoralParty = {
+    id: 0,
+    name: '',
+    description: ''
+  };
+  id: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private electoralPartyService: ElectoralPartyService
   ) {
-    this.addForm = this.fb.group({
+    this.addElectoralParty = this.fb.group({
       name: ['', Validators.required]
     });
   }
@@ -26,15 +32,13 @@ export class AddElectoralPartyComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.addForm.valid) {
-      this.electoralPartyService.addElectoralParty(this.addForm.value).subscribe({
+      this.electoralPartyService.addElectoralParty(this.electoralparty).subscribe({
         next: () => {
-          this.router.navigate(['/electoralparties']);
+          this.router.navigate(['/parties']);
         },
         error: (err:any) => {
           console.error('Error adding electoral party:', err);
         }
       });
-    }
   }
 }

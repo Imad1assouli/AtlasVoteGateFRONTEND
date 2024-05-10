@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UtilisateurService } from '../../../services/utilisateurs/utilisateur.service';
+import { Utilisateur } from '../../../model/Utilisateur.model';
+import { Role } from '../../../enum/Role.enum';
+
 
 @Component({
   selector: 'app-add-utilisateur',
@@ -9,28 +12,29 @@ import { UtilisateurService } from '../../../services/utilisateurs/utilisateur.s
   styleUrls: ['./add-utilisateur.component.css']
 })
 export class AddUtilisateurComponent implements OnInit {
-  addForm: FormGroup;
+
+  editUtilisateurFormGroup!: FormGroup;
+  utilisateur: Utilisateur = {
+    nom: '',
+    prenom: '',
+    login: '',
+    password: '',
+    role: Role.ROLE_ADMINISTRATEUR,
+    id: 0
+  };
+  id: any;
 
   constructor(
     private fb: FormBuilder,
     private userService: UtilisateurService,
     private router: Router
-  ) {
-    this.addForm = this.fb.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      login: ['', Validators.required],
-      password: ['', Validators.required],
-      role: ['', Validators.required]
-    });
-  }
-
+  ){}
   ngOnInit(): void {
   }
-
+  
   onSubmit(): void {
-    if (this.addForm.valid) {
-      this.userService.addUtilisateur(this.addForm.value).subscribe({
+   
+      this.userService.addUtilisateur(this.utilisateur).subscribe({
         next: () => {
           this.router.navigate(['/utilisateurs']);
         },
@@ -39,5 +43,7 @@ export class AddUtilisateurComponent implements OnInit {
         }
       });
     }
-  }
+  
 }
+
+

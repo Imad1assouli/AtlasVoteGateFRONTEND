@@ -39,7 +39,7 @@ export class UtilisateurComponent implements OnInit  {
   onDelete(id:number) {
     this.utilisateurService.deleteUtilisateur(id).subscribe({
       next: (data) => {
-        this.router.navigateByUrl("/navbar/utilisateurs");
+        this.router.navigateByUrl("/utilisateurs");
       }, error: (err) => {
         console.log(err);
       }
