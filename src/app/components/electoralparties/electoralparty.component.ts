@@ -46,4 +46,8 @@ export class ElectoralPartyComponent implements OnInit  {
       );
 
   }
+
+  viewElectoralPartyDetails(id: any) {
+    this.electoralpartyService.viewElectoralPartyDetails(id);
+  }
 }

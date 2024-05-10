@@ -31,10 +31,14 @@ export class ElectoralPartyService {
   }
 
   getElectoralPartyById(id: any) {
-    return this.http.get(this.backendHost + "/electoralparties/" + id);
+    return this.http.get(this.backendHost + "/electoralParties/" + id);
   }
 
   deleteElectoralParty(id: number) {
     return this.http.delete(this.backendHost + "/electoralparties/delete/" + id);
+  }
+
+  viewElectoralPartyDetails(id: any) {
+    return this.http.get(this.backendHost + "/electoralParties/" + id);
   }
 }
