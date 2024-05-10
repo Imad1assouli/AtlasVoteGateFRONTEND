@@ -19,19 +19,16 @@ export class UtilisateurComponent implements OnInit  {
   constructor(private fb: FormBuilder, public utilisateurService: UtilisateurService, private route: ActivatedRoute, private router: Router) { //route : pour obtient le id qui est dans la route{ }
   }
   ngOnInit(): void {
-    this.utilisateurService.getUtilisateur(1).subscribe({
-      next: (utilisateur) => {
-        this.utilisateur = utilisateur;
-        this.editUtilisateurFormGroup  = this.fb.group({
-          login: this.fb.control(this.utilisateur.login),
-          nom: this.fb.control(this.utilisateur.nom),
-          prenom: this.fb.control(this.utilisateur.prenom),
-        });
-      }, error: (err:any) => {
-        console.log(err);
+    this.utilisateurService.getAllUtilisateurs().subscribe({
+      next: (data: Utilisateur[]) => {
+        this.utilisateurs = data; // Assigner les données retournées à utilisateurs
+      },
+      error: (err) => {
+        console.log(err); // Gérer les erreurs si nécessaire
       }
-    })
+    });
   }
+  
   Edit() {
     this.router.navigateByUrl("/navbar/edit-utilisateur/"+1);
   }

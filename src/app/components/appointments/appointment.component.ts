@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from "../../model/Appointment.model";
-import { ActivatedRoute, Router } from "@angular/router";
+
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AppointmentService } from "../../services/appointments/appointment.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-appointment',

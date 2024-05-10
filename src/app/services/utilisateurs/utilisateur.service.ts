@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 })
 
 export class UtilisateurService {
-  private backendHost = "http://localhost:8080";
+  private backendHost = "http://localhost:8080/api/admin";
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,10 @@ export class UtilisateurService {
   }
 
   public addUtilisateur(user: Utilisateur): Observable<Utilisateur> {
-    return this.http.post<Utilisateur>(`${this.backendHost}/utilisateurs/add`, user);
+    return this.http.post<Utilisateur>(`${this.backendHost}/users`, user);
+  }
+
+  public getAllUtilisateurs () :Observable<Utilisateur>{
+    return this.http.get<Utilisateur>("${this.backendHost}/allusers");
   }
 }
