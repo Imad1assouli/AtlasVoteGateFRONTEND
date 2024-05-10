@@ -1,19 +1,18 @@
+// appointment.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Appointment} from "../../model/Appointment.model";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Appointment } from "../../model/Appointment.model";
 import { Observable } from 'rxjs';
-import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AppointmentService {
-  private backendHost = "http://localhost:8080";
+  private backendHost = "http://localhost:8080/api/admin";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
 
-  // Add your service methods here
   getAppointment(id: number): Observable<Appointment> {
     return this.http.get<Appointment>(`${this.backendHost}/appointments/${id}`);
   }
@@ -22,15 +21,25 @@ export class AppointmentService {
     return this.http.put<Appointment>(`${this.backendHost}/appointments/${id}`, appointment);
   }
 
-  deleteAppointment(id: number): Observable<Appointment> {
-    return this.http.delete<Appointment>(`${this.backendHost}/appointments/${id}`);
+  deleteAppointment(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.backendHost}/appointments/${id}`);
   }
 
-  addAppointment(value: ɵTypedOrUntyped<any, ɵFormGroupValue<any>, any>) {
-    return this.http.post(`${this.backendHost}/appointments`, value);
+  addAppointment(value: any): Observable<any> {
+    return this.http.post<any>(`${this.backendHost}/appointments`, value);
   }
 
-  getAvailableAppointments() {
+  getAvailableAppointments(): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.backendHost}/appointments/available`);
+  }
+
+  getAllAppointmentsForToday(): Observable<Appointment[]> {
+    const token = this.authenticationService.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Appointment[]>('http://localhost:8080/api/admin/appointments/today', { headers });
   }
 }
