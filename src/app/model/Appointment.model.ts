@@ -1,4 +1,4 @@
-import { DatePipeConfig } from "@angular/common";
+import { status } from "../enum/Status.enum";
 
 export interface Appointment {
   id: number;
@@ -8,5 +8,5 @@ export interface Appointment {
   appointmentTime: Date;
   nom: string;
   prenom: string;
-  status:string;
+  status: status; // Make status field optional
 }

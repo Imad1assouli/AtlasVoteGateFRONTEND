@@ -1,0 +1,5 @@
+export enum status{
+PENDING_VERIFICATION,
+VERIFIED,
+CANCELED
+}

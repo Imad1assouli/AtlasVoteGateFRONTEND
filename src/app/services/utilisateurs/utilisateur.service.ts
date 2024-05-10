@@ -23,8 +23,8 @@ export class UtilisateurService {
     return this.http.delete(this.backendHost + "/utilisateurs/delete/" + id);
   }
 
-  public addUtilisateur(user: Utilisateur): Observable<Utilisateur> {
-    return this.http.post<Utilisateur>(`${this.backendHost}/users`, user);
+  public addUtilisateur(user: Utilisateur): Observable<Object> {
+    return this.http.post(`${this.backendHost}/users`, user);
   }
 
   public getAllUtilisateurs () :Observable<Utilisateur[]>{

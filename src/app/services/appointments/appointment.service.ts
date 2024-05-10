@@ -21,13 +21,11 @@ export class AppointmentService {
     return this.http.put<Appointment>(`${this.backendHost}/appointments/${id}`, appointment);
   }
 
-  deleteAppointment(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.backendHost}/appointments/${id}`);
+  cancelAppointment(id: number) {
+    return this.http.post('http://localhost:8080/api/admin/appointments/' + id + '/cancel', {});
   }
 
-  addAppointment(value: any): Observable<any> {
-    return this.http.post<any>(`${this.backendHost}/appointments`, value);
-  }
+  
 
   getAvailableAppointments(): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.backendHost}/appointments/available`);
@@ -38,6 +36,9 @@ export class AppointmentService {
   }
   verifyAppointment(id: number) {
     return this.http.post('http://localhost:8080/api/admin/appointments/' + id + '/verify', {});
+  }
+  addAppointment(appointment: Appointment): Observable<Object> {
+    return this.http.post(`${this.backendHost}/appointments`, appointment);
   }
   
   

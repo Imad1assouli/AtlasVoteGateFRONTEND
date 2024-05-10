@@ -37,7 +37,7 @@ export class AppointmentComponent implements OnInit  {
   }
 
   cancelAppointment(id: number) {
-    this.appointmentService.deleteAppointment(id).subscribe({
+    this.appointmentService.cancelAppointment(id).subscribe({
       next: () => {
         this.getAllAppointmentsForToday(); // Refresh appointments after cancellation
       },
@@ -56,7 +56,7 @@ export class AppointmentComponent implements OnInit  {
     this.appointmentService.verifyAppointment(id).subscribe(
       (data) => {
         console.log('Appointment verified successfully:', data);
-        this.goToAppointmentsForToday();
+        this.getAllAppointmentsForToday();
       
       },
       (error) => {
@@ -68,7 +68,9 @@ export class AppointmentComponent implements OnInit  {
     goToAppointmentsForToday(){
       this.router.navigate(["/appointments"]);  
     }
-  addAppointment(){}
+  addAppointment(){
+    this.router.navigate(["/appointments/add"]); 
+  }
 
   // Other methods like editAppointment, viewAppointment, verifyAppointment, etc. remain the same
 
