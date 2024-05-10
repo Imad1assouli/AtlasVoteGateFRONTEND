@@ -26,8 +26,8 @@ export class ElectoralPartyService {
 
   }
 
-  addElectoralParty(value: ɵTypedOrUntyped<any, ɵFormGroupValue<any>, any>) {
-    return this.http.post(this.backendHost + "/electoralparties/add", value);
+  addElectoralParty(electoralparty: ElectoralParty) {
+    return this.http.post(this.backendHost + "/electoralParties/", electoralparty);
   }
 
   getElectoralPartyById(id: any) {
@@ -35,10 +35,10 @@ export class ElectoralPartyService {
   }
 
   deleteElectoralParty(id: number) {
-    return this.http.delete(this.backendHost + "/electoralparties/delete/" + id);
+    return this.http.delete(this.backendHost + "/electoralParties/" + id);
   }
 
   viewElectoralPartyDetails(id: any) {
-    return this.http.get(this.backendHost + "/electoralParties/" + id);
+    return this.http.get(this.backendHost + "/electoralParties/details" + id);
   }
 }
