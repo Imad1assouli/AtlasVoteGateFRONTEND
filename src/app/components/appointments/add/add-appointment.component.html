@@ -2,33 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Add Appointment</title>
   <link rel="stylesheet" href="./add-appointment.component.css">
 </head>
 <body>
-<!-- add-appointment.component.html -->
-<div class="add-container">
-  <h2>Add New Appointment</h2>
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+<div class="add-appointment-container">
+  <h1>Sign Up</h1>
+  <form (ngSubmit)="onSubmit()"  #appointmentForm="ngForm">
     <div class="form-field">
-      <label for="cni">CNI:</label>
-      <input type="text" id="cni" formControlName="cni">
+      <label for="nom">Last Name:</label>
+      <input type="text" id="nom" name="nom" placeholder="Enter last name" [(ngModel)]="appointment.nom" required>
     </div>
     <div class="form-field">
-      <label for="nom">Name:</label>
-      <input type="text" id="nom" formControlName="nom">
-    </div>
-    <div class="form-field">
-      <label for="prenom">Surname:</label>
-      <input type="text" id="prenom" formControlName="prenom">
+      <label for="prenom">First Name:</label>
+      <input type="text" id="prenom" name="prenom" placeholder="Enter first name" [(ngModel)]="appointment.prenom" required>
     </div>
     <div class="form-field">
       <label for="email">Email:</label>
-      <input type="email" id="email" formControlName="email">
+      <input type="email" id="email" name="email" placeholder="Enter email" [(ngModel)]="appointment.email" required>
     </div>
-    <button type="submit" class="submit-btn">Create</button>
+    <div class="form-field">
+      <label for="appointment">Appointment Date:</label>
+      <input type="datetime-local" id="appointment" name="appointment" [(ngModel)]="appointment.appointmentTime" required>
+    </div>
+    <div class="form-field">
+      <label for="cne">CNE:</label>
+      <input type="text" id="cne" name="cne" placeholder="Enter CNE" [(ngModel)]="appointment.cne" required>
+    </div>
+    <div class="form-field">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="appointment.password" required>
+    </div>
+    <div class="form-field">
+      <label for="status">Status:</label>
+      <select id="role" formControlName="role" [(ngModel)]="appointment.status" required>
+        <option value="PENDING_VERIFICATION">PENDING_VERIFICATION</option>
+        <option value="VERIFIED">VERIFIED</option>
+        <option value="CANCELED">CANCELED</option>
+      </select> 
+    </div>
+    
+    <button type="submit" class="btn btn-signup" [disabled]="!appointmentForm.valid">add appointment</button>
   </form>
 </div>
-
 </body>
 </html>

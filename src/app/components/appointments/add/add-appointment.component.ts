@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppointmentService } from '../../../services/appointments/appointment.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import { Appointment } from '../../../model/Appointment.model';
+import { status } from '../../../enum/Status.enum';
 
 @Component({
   selector: 'app-add-appointment',
@@ -9,34 +12,28 @@ import { AppointmentService } from '../../../services/appointments/appointment.s
   styleUrls: ['./add-appointment.component.css']
 })
 export class AddAppointmentComponent implements OnInit {
-  addForm: FormGroup;
+  appointment: Appointment = {
+    id: 0, cne: '', email: '', password: '', appointmentTime: new Date(), nom: '', prenom: '',
+    status: status.PENDING_VERIFICATION
+  };
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private appointmentService: AppointmentService
-  ) {
-    this.addForm = this.fb.group({
-      cni: ['', Validators.required],
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
-    });
-  }
+    private appointmentService: AppointmentService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-  }
-
+    
+   } 
+    
   onSubmit(): void {
-    if (this.addForm.valid) {
-      this.appointmentService.addAppointment(this.addForm.value).subscribe({
+      this.appointmentService.addAppointment(this.appointment).subscribe({
         next: () => {
-          this.router.navigate(['/appointments']);
+          this.router.navigate(['/']);
         },
-        error: (err) => {
-          console.error('Error adding appointment:', err);
+        error: (err: any) => {
+          console.error('Error during add appointment :', err);
         }
       });
     }
-  }
 }
