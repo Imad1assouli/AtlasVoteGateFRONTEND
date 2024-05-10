@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       response => {
         this.authenticationService.setUser(response.utilisateur); // Assuming 'utilisateur' contains user details
         // Redirect based on user role or a default route
-        this.router.navigateByUrl("/navbar/home");
+        this.router.navigateByUrl("/home");
       },
       error => {
         this.snackBar.open('Invalid username or password!', 'Close', { duration: 3000 });
