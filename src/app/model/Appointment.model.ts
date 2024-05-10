@@ -8,4 +8,5 @@ export interface Appointment {
   appointmentTime: Date;
   nom: string;
   prenom: string;
+  status:string;
 }

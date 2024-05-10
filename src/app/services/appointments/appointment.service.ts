@@ -34,12 +34,11 @@ export class AppointmentService {
   }
 
   getAllAppointmentsForToday(): Observable<Appointment[]> {
-    const token = this.authenticationService.getToken();
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    return this.http.get<Appointment[]>('http://localhost:8080/api/admin/appointments/today', { headers });
+    return this.http.get<Appointment[]>('http://localhost:8080/api/admin/appointments/today');
   }
+  verifyAppointment(id: number) {
+    return this.http.post('http://localhost:8080/api/admin/appointments/' + id + '/verify', {});
+  }
+  
+  
 }

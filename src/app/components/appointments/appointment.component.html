@@ -8,7 +8,8 @@
         <tr>
           <th>Nom</th>
           <th>Prenom</th>
-          <th>cne</th>
+          <th>CNE</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -17,6 +18,7 @@
           <td>{{ appointment.nom }}</td>
           <td>{{ appointment.prenom }}</td>
           <td>{{ appointment.cne }}</td>
+          <td>{{ appointment.status }}</td>
           <td>
             <button class="btn btn-info" (click)="editAppointment(appointment.id)">Update</button>
             <button class="btn btn-danger" style="margin-left: 10px;" (click)="cancelAppointment(appointment.id)">Cancel</button>

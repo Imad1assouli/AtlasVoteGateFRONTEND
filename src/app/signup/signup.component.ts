@@ -13,7 +13,10 @@ import { AuthenticationService } from "../services/authentication/authentication
 export class SignUpComponent implements OnInit {
   //signupForm: FormGroup;
   //appointments: Appointment[] = [];
-  appointment: Appointment = { id: 0, cne: '', email: '', password: '', appointmentTime: new Date(), nom: '', prenom: '' };
+  appointment: Appointment = {
+    id: 0, cne: '', email: '', password: '', appointmentTime: new Date(), nom: '', prenom: '',
+    status: ''
+  };
 
   constructor(
     private authService: AuthenticationService,
