@@ -10,6 +10,7 @@ import {ElectoralPartyService} from "../../../services/electoralparties/electora
 })
 export class AddElectoralPartyComponent implements OnInit {
   addForm: FormGroup;
+  electoralparty: any;
 
   constructor(
     private fb: FormBuilder,

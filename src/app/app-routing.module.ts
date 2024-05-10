@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'appointments', component: AppointmentComponent },
   { path: 'appointments/add', component: AddAppointmentComponent }, // Route for adding appointments
   { path: 'appointments/edit', component: EditAppointmentComponent },
-  { path: 'electoralparties', component: ElectoralPartyComponent },
+  { path: 'parties', component: ElectoralPartyComponent },
   { path: 'electoralparties/add', component: AddElectoralPartyComponent },
   { path: 'electoralparties/details', component: DetailsElectoralPartyComponent },
   { path: 'utilisateurs', component: UtilisateurComponent },

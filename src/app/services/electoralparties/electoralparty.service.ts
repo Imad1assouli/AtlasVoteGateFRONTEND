@@ -8,13 +8,17 @@ import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 })
 
 export class ElectoralPartyService {
-  private backendHost = "http://localhost:8080";
+  private backendHost = "http://localhost:8080/api/admin";
 
   constructor(private http: HttpClient) {
   }
 
   getElectoralParty(id: number) {
     return this.http.get<ElectoralParty>(this.backendHost + "/electoralparties/" + id)
+  }
+
+  getAllElectoralParties() {
+    return this.http.get<ElectoralParty[]>(this.backendHost + "/electoralparties");
   }
 
   updateElectoralParty(electoralParty: ElectoralParty) {
