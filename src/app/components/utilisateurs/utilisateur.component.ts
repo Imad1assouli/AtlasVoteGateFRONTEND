@@ -14,19 +14,22 @@ export class UtilisateurComponent implements OnInit  {
   editUtilisateurFormGroup!: FormGroup;
   utilisateur!: Utilisateur;
   id: any;
-  utilisateurs: any;
+  utilisateurs:Utilisateur[]=[];
 
   constructor(private fb: FormBuilder, public utilisateurService: UtilisateurService, private route: ActivatedRoute, private router: Router) { //route : pour obtient le id qui est dans la route{ }
   }
   ngOnInit(): void {
-    this.utilisateurService.getAllUtilisateurs().subscribe({
-      next: (data: Utilisateur[]) => {
-        this.utilisateurs = data; // Assigner les données retournées à utilisateurs
+    this.getAllUtilisateurs();
+  }
+  getAllUtilisateurs() {
+    this.utilisateurService.getAllUtilisateurs().subscribe(
+      (data: Utilisateur[]) => {
+        this.utilisateurs = data;
       },
-      error: (err) => {
-        console.log(err); // Gérer les erreurs si nécessaire
+      (error: any) => {
+        console.error('Error fetching appointments:', error);
       }
-    });
+    );
   }
   
   Edit() {
