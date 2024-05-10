@@ -18,6 +18,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserModule } from '@angular/platform-browser';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import {AuthInterceptorService} from "./services/auth-interceptor.service";
     AddUtilisateurComponent,
     SignUpComponent,
     LoginComponent,
+  
   ],
   imports: [
     BrowserModule,
