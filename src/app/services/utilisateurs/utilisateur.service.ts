@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Utilisateur} from "../../model/Utilisateur.model";
 import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 import {Observable} from "rxjs";
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UtilisateurService {
-  private backendHost = "http://localhost:8080";
-
-  constructor(private http: HttpClient) {}
+  private backendHost = "http://localhost:8080/api/admin";
+  
+  constructor(private http: HttpClient,private authenticationService: AuthenticationService) {}
 
   // Add your service methods here
   getUtilisateur(id: number) {
@@ -23,6 +24,17 @@ export class UtilisateurService {
   }
 
   public addUtilisateur(user: Utilisateur): Observable<Utilisateur> {
-    return this.http.post<Utilisateur>(`${this.backendHost}/utilisateurs/add`, user);
+    return this.http.post<Utilisateur>(`${this.backendHost}/users`, user);
+  }
+
+  public getAllUtilisateurs () :Observable<Utilisateur[]>{
+
+    const token = this.authenticationService.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Utilisateur[]>(`${this.backendHost}/allusers`, { headers });
   }
 }
