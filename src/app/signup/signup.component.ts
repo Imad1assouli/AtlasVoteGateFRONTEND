@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Appointment } from "../model/Appointment.model";
 import { AppointmentService } from "../services/appointments/appointment.service";
 import { AuthenticationService } from "../services/authentication/authentication.service";
+import { status } from '../enum/Status.enum';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,10 @@ import { AuthenticationService } from "../services/authentication/authentication
 export class SignUpComponent implements OnInit {
   //signupForm: FormGroup;
   //appointments: Appointment[] = [];
-  appointment: Appointment = { id: 0, cne: '', email: '', password: '', appointmentTime: new Date(), nom: '', prenom: '' };
+  appointment: Appointment = {
+    id: 0, cne: '', email: '', password: '', appointmentTime: new Date(), nom: '', prenom: '',
+    status: status.PENDING_VERIFICATION
+  };
 
   constructor(
     private authService: AuthenticationService,
