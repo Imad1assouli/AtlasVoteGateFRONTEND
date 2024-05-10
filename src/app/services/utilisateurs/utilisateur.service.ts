@@ -11,7 +11,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 
 export class UtilisateurService {
   private backendHost = "http://localhost:8080/api/admin";
-  
+
   constructor(private http: HttpClient,private authenticationService: AuthenticationService) {}
 
   // Add your service methods here
@@ -20,7 +20,7 @@ export class UtilisateurService {
   }
 
   deleteUtilisateur(id: number) {
-    return this.http.delete(this.backendHost + "/utilisateurs/delete/" + id);
+    return this.http.delete(this.backendHost + `/utilisateurs/` + id);
   }
 
   public addUtilisateur(user: Utilisateur): Observable<Utilisateur> {
@@ -28,13 +28,6 @@ export class UtilisateurService {
   }
 
   public getAllUtilisateurs () :Observable<Utilisateur[]>{
-
-    const token = this.authenticationService.getToken();
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    return this.http.get<Utilisateur[]>(`${this.backendHost}/allusers`, { headers });
+    return this.http.get<Utilisateur[]>(`${this.backendHost}/allusers`);
   }
 }

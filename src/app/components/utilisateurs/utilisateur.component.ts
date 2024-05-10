@@ -21,6 +21,7 @@ export class UtilisateurComponent implements OnInit  {
   ngOnInit(): void {
     this.getAllUtilisateurs();
   }
+
   getAllUtilisateurs() {
     this.utilisateurService.getAllUtilisateurs().subscribe(
       (data: Utilisateur[]) => {
@@ -31,19 +32,21 @@ export class UtilisateurComponent implements OnInit  {
       }
     );
   }
-  
+
   Edit() {
     this.router.navigateByUrl("/navbar/edit-utilisateur/"+1);
   }
 
-  onDelete(id:number) {
-    this.utilisateurService.deleteUtilisateur(id).subscribe({
-      next: (data) => {
-        this.router.navigateByUrl("/utilisateurs");
-      }, error: (err) => {
-        console.log(err);
+  onDelete(id: number) {
+    this.utilisateurService.deleteUtilisateur(id).subscribe(
+      () => {
+        console.log('User deleted successfully');
+        this.getAllUtilisateurs();
+      },
+      error => {
+        console.error('Error deleting user', error);
       }
-    })
+    );
   }
 
   addUtilisateur() {
