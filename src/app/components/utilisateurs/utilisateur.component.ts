@@ -3,6 +3,8 @@ import { Utilisateur } from "../../model/Utilisateur.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UtilisateurService } from "../../services/utilisateurs/utilisateur.service";
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../appointments/dialog/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-utilisateurs',
@@ -20,7 +22,7 @@ onUpdate(id: number) {
   id: any;
   utilisateurs:Utilisateur[]=[];
 
-  constructor(private fb: FormBuilder, public utilisateurService: UtilisateurService, private route: ActivatedRoute, private router: Router) { //route : pour obtient le id qui est dans la route{ }
+  constructor(private fb: FormBuilder, public utilisateurService: UtilisateurService, private route: ActivatedRoute, private router: Router ,private dialog: MatDialog) { //route : pour obtient le id qui est dans la route{ }
   }
   ngOnInit(): void {
     this.getAllUtilisateurs();
@@ -35,18 +37,27 @@ onUpdate(id: number) {
         console.error('Error fetching appointments:', error);
       }
     );  }
-  onDelete(id: number) {
-    this.utilisateurService.deleteUtilisateur(id).subscribe(
-      () => {
-        console.log('User deleted successfully');
-        this.getAllUtilisateurs();
-      },
-      error => {
-        console.error('Error deleting user', error);
-      }
-    );
-  }
+  
+  onDelete(id:number){
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { message: 'Are you sure you want to update this user ?' }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.utilisateurService.deleteUtilisateur(id).subscribe(
+          () => {
+            console.log('User deleted successfully');
+            this.getAllUtilisateurs();
+          },
+          error => {
+            console.error('Error deleting user', error);
+          }
+        );
+      }
+    });
+  }
+  
   addUtilisateur() {
     this.router.navigate(['/utilisateurs/add']);
   }

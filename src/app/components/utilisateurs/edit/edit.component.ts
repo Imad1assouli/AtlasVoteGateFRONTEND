@@ -4,6 +4,8 @@ import { Role } from '../../../enum/Role.enum';
 import { FormBuilder } from '@angular/forms';
 import { UtilisateurService } from '../../../services/utilisateurs/utilisateur.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../../appointments/dialog/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit',
@@ -29,21 +31,30 @@ export class EditComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UtilisateurService,
     private router: Router,
+    private dialog: MatDialog,
     private route: ActivatedRoute
   ){}
-onSubmit() {
-  this.userService.updateUtilisateur(this.id, this.utilisateur).subscribe(
-    (data) => {
-      console.log(data);
-      this.gotoUsersList();
-    },
-    (error) => {
-      console.error('Error updating user:', error);
-    }
-  );
-}
+
   gotoUsersList() {
     this.router.navigate(['/utilisateurs']);
   }
+  onSubmit(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { message: 'Are you sure you want to update this user ?' }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.updateUtilisateur(this.id, this.utilisateur).subscribe(
+          (data) => {
+            console.log(data);
+            this.gotoUsersList();
+          },
+          (error) => {
+            console.error('Error updating user:', error);
+          }
+        );
+      }
+    });
+  }
 }
