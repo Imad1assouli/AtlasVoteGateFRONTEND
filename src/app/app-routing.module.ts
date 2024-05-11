@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { HomeComponent } from "./components/home/home.component";
 import { AppointmentComponent } from "./components/appointments/appointment.component";
 import { ElectoralPartyComponent } from "./components/electoralparties/electoralparty.component";
@@ -14,6 +13,8 @@ import {SignUpComponent} from "./signup/signup.component";
 import {LoginComponent} from "./login/login.component";
 import {EditElectoralPartyComponent} from "./components/electoralparties/edit/edit-electoralparty.component";
 import { ViewComponent } from './components/appointments/view/view.component';
+import { EditComponent } from './components/utilisateurs/edit/edit.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'electoralparties/edit/:id', component: EditElectoralPartyComponent },
   { path: 'utilisateurs', component: UtilisateurComponent },
   { path: 'utilisateurs/add', component: AddUtilisateurComponent },
+  { path: 'utilisateurs/edit/:id', component: EditComponent },
   { path: '**', redirectTo: '' } // fallback route
 ];
 

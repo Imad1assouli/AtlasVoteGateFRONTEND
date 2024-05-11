@@ -30,7 +30,7 @@
           <td>{{ utilisateur.login }}</td>
           <td>{{ utilisateur.role }}</td>
           <td>
-            <button class="btn btn-edit" routerLink="/edit-user/{{utilisateur.id}}">Edit</button>
+            <button class="btn btn-edit" (click)="onUpdate(utilisateur.id)">Edit</button>
             <button class="btn btn-delete" (click)="onDelete(utilisateur.id)">Delete</button>
           </td>
         </tr>

@@ -17,11 +17,11 @@ import {LoginComponent} from "./login/login.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserModule } from '@angular/platform-browser';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
-import {EditElectoralPartyComponent} from "./components/electoralparties/edit/edit-electoralparty.component";
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ConfirmationDialogComponent } from './components/appointments/dialog/confirmation-dialog/confirmation-dialog.component';
 import { ViewComponent } from './components/appointments/view/view.component';
+import { EditElectoralPartyComponent } from './components/electoralparties/edit/edit-electoralparty.component';
 
 
 @NgModule({
@@ -42,6 +42,8 @@ import { ViewComponent } from './components/appointments/view/view.component';
     ConfirmationDialogComponent,
     ViewComponent
 
+
+  
   ],
   imports: [
     BrowserModule,
