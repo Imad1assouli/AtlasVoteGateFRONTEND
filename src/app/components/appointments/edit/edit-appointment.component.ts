@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { AppointmentService } from '../../../services/appointments/appointment.service';
+import { Appointment } from '../../../model/Appointment.model';
+import { ConfirmationDialogComponent } from '../dialog/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-edit-appointment',
@@ -10,38 +12,37 @@ import { AppointmentService } from '../../../services/appointments/appointment.s
 })
 
 export class EditAppointmentComponent implements OnInit {
-  editForm: FormGroup;
   id!: number;
+  appointment:Appointment={} as Appointment;
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private dialog: MatDialog,
     private appointmentService: AppointmentService
-  ) {
-    this.editForm = this.fb.group({
-      cni: ['', Validators.required],
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
-    });
-  }
-
+  ) {}
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.id = +params['id'];
-      this.appointmentService.getAppointment(this.id).subscribe(appointment => {
-        this.editForm.patchValue(appointment);
+      this.id =  this.route.snapshot.params['id'];
+      this.appointmentService.getAppointment(this.id).subscribe((data:Appointment) => {
+        this.appointment=data;
       });
     });
   }
 
   onSubmit(): void {
-    if (this.editForm.valid) {
-      this.appointmentService.updateAppointment(this.id, this.editForm.value).subscribe({
-        next: () => this.router.navigate(['/appointments']),
-        error: (err) => console.error('Error updating appointment:', err)
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { message: 'Are you sure you want to update this appointment?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appointmentService.updateAppointment(this.id, this.appointment).subscribe({
+          next: () => this.router.navigate(['/appointments']),
+          error: (err) => console.error('Error updating appointment:', err)
+        });
+      }
+    });
   }
 }

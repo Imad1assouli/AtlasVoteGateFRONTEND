@@ -29,11 +29,15 @@ export class AddAppointmentComponent implements OnInit {
   onSubmit(): void {
       this.appointmentService.addAppointment(this.appointment).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.goToAppointmentsForToday();
         },
         error: (err: any) => {
           console.error('Error during add appointment :', err);
         }
       });
     }
+    goToAppointmentsForToday(){
+      this.router.navigate(["/appointments"]);  
+    }
+  
 }

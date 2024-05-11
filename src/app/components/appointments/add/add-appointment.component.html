@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="add-appointment-container">
-  <h1>Sign Up</h1>
+  <h1>Add appointment</h1>
   <form (ngSubmit)="onSubmit()"  #appointmentForm="ngForm">
     <div class="form-field">
       <label for="nom">Last Name:</label>
@@ -33,15 +33,6 @@
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="appointment.password" required>
     </div>
-    <div class="form-field">
-      <label for="status">Status:</label>
-      <select id="role" formControlName="role" [(ngModel)]="appointment.status" required>
-        <option value="PENDING_VERIFICATION">PENDING_VERIFICATION</option>
-        <option value="VERIFIED">VERIFIED</option>
-        <option value="CANCELED">CANCELED</option>
-      </select> 
-    </div>
-    
     <button type="submit" class="btn btn-signup" [disabled]="!appointmentForm.valid">add appointment</button>
   </form>
 </div>

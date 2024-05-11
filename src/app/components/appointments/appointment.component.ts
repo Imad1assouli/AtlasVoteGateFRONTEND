@@ -47,9 +47,11 @@ export class AppointmentComponent implements OnInit  {
     });
   }
   editAppointment(id:number){
+    this.router.navigate(["/appointments/edit",id]); 
 
   }
   viewAppointment(id:number){
+    this.router.navigate(["/appointments/view",id]); 
 
   }
   verifyAppointment(id:number){

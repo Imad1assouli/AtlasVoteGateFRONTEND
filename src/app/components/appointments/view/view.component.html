@@ -1,0 +1,14 @@
+<div *ngIf="appointment">
+    <h2>Appointment Details</h2>
+    <p><strong>ID:</strong> {{ appointment.id }}</p>
+    <p><strong>Last Name:</strong> {{ appointment.nom }}</p>
+    <p><strong>First Name:</strong> {{ appointment.prenom }}</p>
+    <p><strong>Email:</strong> {{ appointment.email }}</p>
+    <p><strong>Appointment Time:</strong> {{ appointment.appointmentTime }}</p>
+    <p><strong>Appointment Status:</strong> {{ appointment.status }}</p>
+             <button class="btn btn-info" (click)="editAppointment(appointment.id)">Update</button>
+            <button class="btn btn-danger" style="margin-left: 10px;" (click)="cancelAppointment(appointment.id)">Cancel</button>
+            <button class="btn btn-info" (click)="viewAppointment(appointment.id)">View</button>
+            <button class="btn btn-info" (click)="verifyAppointment(appointment.id)">Verify</button>
+  </div>
+  
