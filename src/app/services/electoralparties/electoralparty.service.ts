@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { ElectoralParty } from "../../model/ElectoralParty.model";
-import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -27,18 +26,23 @@ export class ElectoralPartyService {
   }
 
   addElectoralParty(electoralparty: ElectoralParty) {
-    return this.http.post(this.backendHost + "/electoralParties/", electoralparty);
+    return this.http.post(this.backendHost + "/electoralparties/", electoralparty);
   }
 
   getElectoralPartyById(id: any) {
-    return this.http.get(this.backendHost + "/electoralParties/" + id);
+    return this.http.get(this.backendHost + "/electoralparties/" + id);
   }
 
   deleteElectoralParty(id: number) {
-    return this.http.delete(this.backendHost + "/electoralParties/" + id);
+    return this.http.delete(this.backendHost + "/electoralparties/" + id);
   }
 
   viewElectoralPartyDetails(id: any) {
-    return this.http.get(this.backendHost + "/electoralParties/details" + id);
+    return this.http.get(this.backendHost + "/electoralparties/details" + id);
   }
+
+  editElectoralParty(electoralparty: ElectoralParty) {
+    return this.http.put(this.backendHost + `/electoralparties/${electoralparty.id}`, electoralparty);
+  }
+
 }
