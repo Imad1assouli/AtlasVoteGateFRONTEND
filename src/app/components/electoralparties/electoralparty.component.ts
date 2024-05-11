@@ -50,4 +50,9 @@ export class ElectoralPartyComponent implements OnInit  {
   viewElectoralPartyDetails(id: number) {
     this.router.navigate(['/electoralparties/details', id]);
   }
+
+  editElectoralParty(id: number) {
+    this.router.navigate(['/electoralparties/edit', id])
+  }
+
 }

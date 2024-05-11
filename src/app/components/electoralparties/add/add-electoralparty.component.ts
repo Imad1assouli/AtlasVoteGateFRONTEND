@@ -34,7 +34,7 @@ export class AddElectoralPartyComponent implements OnInit {
   onSubmit(): void {
       this.electoralPartyService.addElectoralParty(this.electoralparty).subscribe({
         next: () => {
-          this.router.navigate(['/parties']);
+          this.router.navigate(['/electoralparties']);
         },
         error: (err:any) => {
           console.error('Error adding electoral party:', err);

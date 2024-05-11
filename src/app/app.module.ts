@@ -17,6 +17,7 @@ import {LoginComponent} from "./login/login.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserModule } from '@angular/platform-browser';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import {EditElectoralPartyComponent} from "./components/electoralparties/edit/edit-electoralparty.component";
 
 
 @NgModule({
@@ -29,11 +30,12 @@ import {AuthInterceptorService} from "./services/auth-interceptor.service";
     ElectoralPartyComponent,
     DetailsElectoralPartyComponent,
     AddElectoralPartyComponent,
+    EditElectoralPartyComponent,
     UtilisateurComponent,
     AddUtilisateurComponent,
     SignUpComponent,
     LoginComponent,
-  
+
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,7 @@ export class DetailsElectoralPartyComponent implements OnInit {
     }
     this.electoralPartyService.deleteElectoralParty(id).subscribe({
       next: () => {
-        this.router.navigate(['/parties']);
+        this.router.navigate(['/electoralparties']);
       },
       error: (err) => {
         console.error('Error deleting electoral party:', err);
