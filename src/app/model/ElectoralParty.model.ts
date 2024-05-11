@@ -1,5 +1,5 @@
 export interface ElectoralParty {
-  id: number | null
+  id: number 
   name: string
   description: string
 }

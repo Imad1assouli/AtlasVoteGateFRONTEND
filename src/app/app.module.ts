@@ -44,7 +44,6 @@ import { EditComponent } from './components/utilisateurs/edit/edit.component';
     ViewComponent,
     EditComponent,
 
-
   
   ],
   imports: [
