@@ -10,6 +10,10 @@ import { UtilisateurService } from "../../services/utilisateurs/utilisateur.serv
   styleUrls: ['./utilisateur.component.css']
 })
 export class UtilisateurComponent implements OnInit  {
+onUpdate(id: number) {
+  this.router.navigateByUrl('/utilisateurs/edit/' + id)
+
+}
 
   editUtilisateurFormGroup!: FormGroup;
   utilisateur!: Utilisateur;
@@ -30,13 +34,7 @@ export class UtilisateurComponent implements OnInit  {
       (error: any) => {
         console.error('Error fetching appointments:', error);
       }
-    );
-  }
-
-  Edit() {
-    this.router.navigateByUrl("/navbar/edit-utilisateur/"+1);
-  }
-
+    );  }
   onDelete(id: number) {
     this.utilisateurService.deleteUtilisateur(id).subscribe(
       () => {

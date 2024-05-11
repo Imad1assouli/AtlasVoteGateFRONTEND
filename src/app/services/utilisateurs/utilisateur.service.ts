@@ -10,13 +10,15 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 
 export class UtilisateurService {
+ 
   private backendHost = "http://localhost:8080/api/admin";
+  
 
   constructor(private http: HttpClient,private authenticationService: AuthenticationService) {}
 
   // Add your service methods here
   getUtilisateur(id: number) {
-    return this.http.get<Utilisateur>(this.backendHost + "/utilisateurs/" + id);
+    return this.http.get<Utilisateur>(this.backendHost + "/users/" + id);
   }
 
   deleteUtilisateur(id: number) {
@@ -29,5 +31,8 @@ export class UtilisateurService {
 
   public getAllUtilisateurs () :Observable<Utilisateur[]>{
     return this.http.get<Utilisateur[]>(`${this.backendHost}/allusers`);
+  }
+  public updateUtilisateur (id:number,user: Utilisateur):Observable<Utilisateur>{
+    return this.http.put<Utilisateur>(`${this.backendHost}/users/` + id , user);
   }
 }

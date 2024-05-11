@@ -12,6 +12,7 @@ import {UtilisateurComponent} from "./components/utilisateurs/utilisateur.compon
 import {AddUtilisateurComponent} from "./components/utilisateurs/add/add-utilisateur.component";
 import {SignUpComponent} from "./signup/signup.component";
 import {LoginComponent} from "./login/login.component";
+import { EditComponent } from './components/utilisateurs/edit/edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'electoralparties/details/:id', component: DetailsElectoralPartyComponent },
   { path: 'utilisateurs', component: UtilisateurComponent },
   { path: 'utilisateurs/add', component: AddUtilisateurComponent },
+  { path: 'utilisateurs/edit/:id', component: EditComponent },
   { path: '**', redirectTo: '' } // fallback route
 ];
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier Utilisateur</title>
+  <link rel="stylesheet" href="../add/add-utilisateur.component.css">
+</head>
+<body>
+<!-- add-utilisateur.component.html -->
+<div class="add-user-container">
+  <h1>Update User</h1>
+  <form  (ngSubmit)="onSubmit()" #useForm="ngForm">
+    <div class="form-field">
+      <label for="nom">Nom:</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="utilisateur.nom" required>
+    </div>
+    <div class="form-field">
+      <label for="prenom">Prénom:</label>
+      <input type="text" id="prenom" name="prenom" [(ngModel)]="utilisateur.prenom" required>
+    </div>
+    <div class="form-field">
+      <label for="login">Nom d'Utilisateur:</label>
+      <input type="text" id="login" name="login" [(ngModel)]="utilisateur.login" required>
+    </div>
+    <div class="form-field">
+      <label for="password">Mot de Passe:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="utilisateur.password" required>
+    </div>
+    <div class="form-field">
+      <label for="role" >Role:</label>
+      <select id="role" name="role" [(ngModel)]="utilisateur.role" required>
+        <option value="ROLE_ADMINISTRATEUR">ROLE_ADMINISTRATEUR</option>
+        <option value="ROLE_FONCTIONNAIRE">ROLE_FONCTIONNAIRE</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-submit" [disabled]="!useForm.valid">Modifier</button>
+  </form>
+</div>
+
+</body>
+</html>

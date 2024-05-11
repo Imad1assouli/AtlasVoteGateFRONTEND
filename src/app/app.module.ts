@@ -17,6 +17,7 @@ import {LoginComponent} from "./login/login.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserModule } from '@angular/platform-browser';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import { EditComponent } from './components/utilisateurs/edit/edit.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {AuthInterceptorService} from "./services/auth-interceptor.service";
     AddUtilisateurComponent,
     SignUpComponent,
     LoginComponent,
+    EditComponent,
   
   ],
   imports: [
