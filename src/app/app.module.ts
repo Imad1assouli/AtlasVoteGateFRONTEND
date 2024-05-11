@@ -18,6 +18,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserModule } from '@angular/platform-browser';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
 import {EditElectoralPartyComponent} from "./components/electoralparties/edit/edit-electoralparty.component";
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ConfirmationDialogComponent } from './components/appointments/dialog/confirmation-dialog/confirmation-dialog.component';
+import { ViewComponent } from './components/appointments/view/view.component';
 
 
 @NgModule({
@@ -35,6 +39,8 @@ import {EditElectoralPartyComponent} from "./components/electoralparties/edit/ed
     AddUtilisateurComponent,
     SignUpComponent,
     LoginComponent,
+    ConfirmationDialogComponent,
+    ViewComponent
 
   ],
   imports: [
@@ -43,6 +49,8 @@ import {EditElectoralPartyComponent} from "./components/electoralparties/edit/ed
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     provideAnimationsAsync(),

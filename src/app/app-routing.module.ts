@@ -13,6 +13,7 @@ import {AddUtilisateurComponent} from "./components/utilisateurs/add/add-utilisa
 import {SignUpComponent} from "./signup/signup.component";
 import {LoginComponent} from "./login/login.component";
 import {EditElectoralPartyComponent} from "./components/electoralparties/edit/edit-electoralparty.component";
+import { ViewComponent } from './components/appointments/view/view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'appointments', component: AppointmentComponent },
   { path: 'appointments/add', component: AddAppointmentComponent }, // Route for adding appointments
-  { path: 'appointments/edit', component: EditAppointmentComponent },
+  { path: 'appointments/edit/:id', component: EditAppointmentComponent },
+  { path: 'appointments/view/:id', component: ViewComponent },
   { path: 'electoralparties', component: ElectoralPartyComponent },
   { path: 'electoralparties/add', component: AddElectoralPartyComponent },
   { path: 'electoralparties/details/:id', component: DetailsElectoralPartyComponent },
