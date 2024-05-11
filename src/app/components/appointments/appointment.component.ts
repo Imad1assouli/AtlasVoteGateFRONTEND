@@ -4,6 +4,8 @@ import { Appointment } from "../../model/Appointment.model";
 import { AppointmentService } from "../../services/appointments/appointment.service";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-appointment',
@@ -18,6 +20,7 @@ export class AppointmentComponent implements OnInit  {
     public appointmentService: AppointmentService,
     private authService: AuthenticationService,
     private router: Router,
+    private dialog: MatDialog,
     private route :ActivatedRoute
   ) {}
 
@@ -35,17 +38,11 @@ export class AppointmentComponent implements OnInit  {
       }
     );
   }
-
-  cancelAppointment(id: number) {
-    this.appointmentService.cancelAppointment(id).subscribe({
-      next: () => {
-        this.getAllAppointmentsForToday(); // Refresh appointments after cancellation
-      },
-      error: (err: any) => {
-        console.log(err);
-      }
-    });
+  onSubmit(): void {
+    
   }
+
+  
   editAppointment(id:number){
     this.router.navigate(["/appointments/edit",id]); 
 
@@ -54,18 +51,47 @@ export class AppointmentComponent implements OnInit  {
     this.router.navigate(["/appointments/view",id]); 
 
   }
-  verifyAppointment(id:number){
-    this.appointmentService.verifyAppointment(id).subscribe(
-      (data) => {
-        console.log('Appointment verified successfully:', data);
-        this.getAllAppointmentsForToday();
-      
-      },
-      (error) => {
-        console.error('Error ', error);
-      
+  
+  verifyAppointment(id: number) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { message: 'Are you sure you want to verify this appointment?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appointmentService.verifyAppointment(id).subscribe(
+          (data) => {
+            console.log('Appointment verified successfully:', data);
+            this.getAllAppointmentsForToday();
+          
+          },
+          (error) => {
+            console.error('Error ', error);
+          
+          }
+        );
       }
-    );
+    });
+    
+  }
+  cancelAppointment(id: number) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { message: 'Are you sure you want to cancel this appointment?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appointmentService.cancelAppointment(id).subscribe({
+          next: () => {
+            this.getAllAppointmentsForToday(); // Refresh appointments after cancellation
+          },
+          error: (err: any) => {
+            console.log(err);
+          }
+        });
+      }
+    });
+    
   }
     goToAppointmentsForToday(){
       this.router.navigate(["/appointments"]);  

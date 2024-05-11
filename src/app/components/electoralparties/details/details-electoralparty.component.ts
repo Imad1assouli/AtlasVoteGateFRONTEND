@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {ElectoralParty} from "../../../model/ElectoralParty.model";
 import {ElectoralPartyService} from "../../../services/electoralparties/electoralparty.service";
+import { ConfirmationDialogComponent } from '../../appointments/dialog/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details-electoral-party',
@@ -9,38 +11,49 @@ import {ElectoralPartyService} from "../../../services/electoralparties/electora
   styleUrls: ['./details-electoralparty.component.css']
 })
 export class DetailsElectoralPartyComponent implements OnInit {
-  party: { name: string; description: string; id: number | null } = { name: '', description: '', id: null }; // initialize with default values
+  party:ElectoralParty={} as ElectoralParty
+  id!:number
 
   constructor(
     private electoralPartyService: ElectoralPartyService,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.electoralPartyService.getElectoralPartyById(id).subscribe({
-      next: (party) => {
-        this.party = party as { name: string, description: string, id: number | null };
-      },
-      error: (err) => {
-        console.error('Error fetching electoral party:', err);
-        this.router.navigate(['/electoralparties']);
-      }
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      this.loadAppointmentDetails();
     });
   }
 
-  onDelete(id: number | null): void {
-    if (id === null) {
-      console.error('Party ID is null');
-      return;
-    }
-    this.electoralPartyService.deleteElectoralParty(id).subscribe({
-      next: () => {
-        this.router.navigate(['/electoralparties']);
+  loadAppointmentDetails(): void {
+    this.electoralPartyService.getElectoralParty(this.id).subscribe(
+      (data: ElectoralParty) => {
+        this.party = data;
       },
-      error: (err) => {
-        console.error('Error deleting electoral party:', err);
+      (error: any) => {
+        console.error('Error fetching appointment details:', error);
+      }
+    );
+  }
+ 
+  onDelete(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { message: 'Are you sure you want to delete this appointment?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.electoralPartyService.deleteElectoralParty(id).subscribe({
+          next: () => {
+            this.router.navigate(['/electoralparties']);
+          },
+          error: (err) => {
+            console.error('Error deleting electoral party:', err);
+          }
+        });
       }
     });
   }

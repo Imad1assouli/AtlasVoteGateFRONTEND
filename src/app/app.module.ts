@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './components/appointments/dialog/confirmation-dialog/confirmation-dialog.component';
 import { ViewComponent } from './components/appointments/view/view.component';
 import { EditElectoralPartyComponent } from './components/electoralparties/edit/edit-electoralparty.component';
+import { EditComponent } from './components/utilisateurs/edit/edit.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { EditElectoralPartyComponent } from './components/electoralparties/edit/
     SignUpComponent,
     LoginComponent,
     ConfirmationDialogComponent,
-    ViewComponent
+    ViewComponent,
+    EditComponent
 
 
   
