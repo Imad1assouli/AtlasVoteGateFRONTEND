@@ -6,6 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VoteService {
+  resumerVote() {
+    this.http.post (`${this.backendHost}/votes/resumeVotingProcess`, {});
+  }
+  lancerVote() {
+    this.http.post (`${this.backendHost}/votes/startVotingProcess`, {});
+  }
+  mettrePause() {
+    this.http.post (`${this.backendHost}/votes/pauseVotingProcess`, {});
+  }
+  terminerVote() {
+    this.http.post (`${this.backendHost}/votes/endVotingProcess`, {});
+  }
   private backendHost = "http://localhost:8080/api/voter";
 
   constructor(private http: HttpClient) {}
@@ -19,4 +31,6 @@ export class VoteService {
   createVote(userId: number, partyId: number) {
     return this.http.post<any>(`${this.backendHost}/votes/${userId}/${partyId}`, {});
   }
+
+  
 }

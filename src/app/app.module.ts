@@ -23,6 +23,7 @@ import { ConfirmationDialogComponent } from './components/appointments/dialog/co
 import { ViewComponent } from './components/appointments/view/view.component';
 import { EditElectoralPartyComponent } from './components/electoralparties/edit/edit-electoralparty.component';
 import { EditComponent } from './components/utilisateurs/edit/edit.component';
+import { VoteComponent } from './components/vote/vote.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { EditComponent } from './components/utilisateurs/edit/edit.component';
     ConfirmationDialogComponent,
     ViewComponent,
     EditComponent,
+    VoteComponent,
 
   
   ],

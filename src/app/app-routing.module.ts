@@ -14,6 +14,7 @@ import {LoginComponent} from "./login/login.component";
 import {EditElectoralPartyComponent} from "./components/electoralparties/edit/edit-electoralparty.component";
 import { ViewComponent } from './components/appointments/view/view.component';
 import { EditComponent } from './components/utilisateurs/edit/edit.component';
+import { VoteComponent } from './components/vote/vote.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'utilisateurs', component: UtilisateurComponent },
   { path: 'utilisateurs/add', component: AddUtilisateurComponent },
   { path: 'utilisateurs/edit/:id', component: EditComponent },
+  { path: 'vote', component: VoteComponent },
   { path: '**', redirectTo: '' } // fallback route
 ];
 

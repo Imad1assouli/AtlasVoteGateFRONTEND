@@ -5,6 +5,7 @@
   <a *ngIf="isUserAdmin() || isUserOfficial()" class="navbar-link" routerLink="/appointments">Appointments</a>
   <a *ngIf="!(isLoggedIn() | async)" class="navbar-link" routerLink="/signup">Sign Up</a>
   <a *ngIf="!(isLoggedIn() | async)" class="navbar-link" routerLink="/login">Login</a>
+  <a *ngIf="isUserAdmin()" class="navbar-link" routerLink="/vote">Vote</a>
   <a *ngIf="(isLoggedIn() | async)" (click)="logout()" class="navbar-link" routerLink="/logout">Logout</a>
 </nav>
 <div class="content">
