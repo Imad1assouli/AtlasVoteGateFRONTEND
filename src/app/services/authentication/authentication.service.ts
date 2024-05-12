@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Role } from '../../enum/Role.enum';
 import { Appointment } from '../../model/Appointment.model';
+import { VoteService } from '../vote.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthenticationService {
   private baseUrl2 = 'http://localhost:8080/auth/signup';
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private voteService :VoteService) {
     // Check for token during initialization
     const token = localStorage.getItem('jwttoken');
     if (token) {
@@ -28,6 +29,8 @@ export class AuthenticationService {
         if (res && res.jwttoken) {
           localStorage.setItem('jwttoken', res.jwttoken);
           this.loggedIn.next(true);
+          const votingStarted = this.voteService.getVotingState();
+          localStorage.setItem('votingStarted', votingStarted ? 'true' : 'false');
         }
       })
     );
