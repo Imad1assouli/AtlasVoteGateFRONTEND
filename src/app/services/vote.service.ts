@@ -6,18 +6,30 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VoteService {
-  resumerVote() {
-    this.http.post (`${this.backendHost}/votes/resumeVotingProcess`, {});
-  }
-  lancerVote() {
-    this.http.post (`${this.backendHost}/votes/startVotingProcess`, {});
-  }
-  mettrePause() {
-    this.http.post (`${this.backendHost}/votes/pauseVotingProcess`, {});
-  }
+
+ 
+
+
+
+
   terminerVote() {
-    this.http.post (`${this.backendHost}/votes/endVotingProcess`, {});
-  }
+    this.votestarted=false;
+   
+    }
+    mettrePause() {
+      this.votestarted=false;
+  
+    }
+    lancerVote() {
+      this.votestarted=true;
+    console.log("vote lance avec succes");
+   
+    
+    }
+    resumerVote(){
+      this.votestarted=true;
+   
+    }
   private backendHost = "http://localhost:8080/api/voter";
 
   constructor(private http: HttpClient) {}
@@ -32,5 +44,16 @@ export class VoteService {
     return this.http.post<any>(`${this.backendHost}/votes/${userId}/${partyId}`, {});
   }
 
+  votestarted: boolean = false;
+
+ 
+
+  setVoteStatus(status: boolean) {
+    this.votestarted = status;
+  }
+
+  getVoteStatus() {
+    return this.votestarted;
+  }
   
 }

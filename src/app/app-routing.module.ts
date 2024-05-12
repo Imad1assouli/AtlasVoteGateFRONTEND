@@ -17,6 +17,7 @@ import { EditComponent } from './components/utilisateurs/edit/edit.component';
 import { VoteComponent } from './components/vote/vote.component';
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },

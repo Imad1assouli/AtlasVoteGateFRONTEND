@@ -12,28 +12,30 @@ import { VoteService } from '../../services/vote.service';
 })
 export class VoteComponent implements OnInit {
 
+  public votestarted:boolean =false;
 
-  constructor(private fb: FormBuilder, public  voteService: VoteService, private route: ActivatedRoute, private router: Router ) { //route : pour obtient le id qui est dans la route{ }
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router ) { //route : pour obtient le id qui est dans la route{ }
   }
 ngOnInit(): void {
   
 }
 terminerVote() {
-this.voteService.terminerVote();
+this.votestarted=false;
 this.router.navigate([`/home/`]);
 }
 mettrePause() {
-this.voteService.mettrePause();
+  this.votestarted=false;
 this.router.navigate([`/home/`]);
 }
 lancerVote() {
-this.voteService.lancerVote();
+  this.votestarted=true;
 console.log("vote lance avec succes");
 this.router.navigate([`/home/`]);
 
 }
 resumerVote(){
-  this.voteService.resumerVote();
+  this.votestarted=true;
   this.router.navigate([`/home/`]);
 }
 }

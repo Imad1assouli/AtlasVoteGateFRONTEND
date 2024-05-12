@@ -8,6 +8,9 @@ import { ElectoralPartyService } from '../../../services/electoralparties/electo
 import { ElectoralParty } from '../../../model/ElectoralParty.model';
 import { ConfirmationDialogComponent } from '../../appointments/dialog/confirmation-dialog/confirmation-dialog.component';
 import { Observable } from 'rxjs';
+import { VoteComponent } from '../../vote/vote.component';
+import { Injectable } from '@angular/core';
+
 
 @Component({
   selector: 'app-details-electoral-party',
@@ -21,12 +24,13 @@ export class DetailsElectoralPartyComponent implements OnInit {
   userHasVoted$!: Observable<boolean>;
 
   constructor(
+    private voteService: VoteService,
     private electoralPartyService: ElectoralPartyService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private router: Router,
     private authService: AuthenticationService,
-    private voteService: VoteService
+    
   ) {}
 
   ngOnInit(): void {
@@ -81,7 +85,7 @@ export class DetailsElectoralPartyComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result && this.voteLance() ) {
         this.voteService.createVote(userId, partyId).subscribe({
           next: () => {
             this.router.navigate(['/electoralparties']);
@@ -93,4 +97,11 @@ export class DetailsElectoralPartyComponent implements OnInit {
       }
     });
   }
+
+  
+  voteLance() :boolean {
+      return this.voteService.votestarted;
+        
+      }
+    
 }
