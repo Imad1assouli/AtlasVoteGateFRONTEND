@@ -45,6 +45,7 @@ import { VoteComponent } from './components/vote/vote.component';
     ViewComponent,
     EditComponent,
     VoteComponent,
+    
 
   
   ],
