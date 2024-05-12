@@ -16,7 +16,7 @@ import { Observable, async } from 'rxjs';
 })
 export class ElectoralPartyComponent implements OnInit  {
   electoralparty!: ElectoralParty;
-  id!: number;
+  id: number=0;
   parties: ElectoralParty[]=[];
   user:Utilisateur={} as Utilisateur;
   userHasVoted$!: Observable<boolean>;
@@ -25,10 +25,9 @@ export class ElectoralPartyComponent implements OnInit  {
               private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.getAllElectoralParties();
     this.user = this.authService.getUser();
     this.userHasVoted$ = this.voteService.hasVoted(this.user.id);
-    this.getAllElectoralParties();
-   
   }
 
   addElectoralParty() {
@@ -46,24 +45,26 @@ export class ElectoralPartyComponent implements OnInit  {
   isUserOfficial() {
     return this.authService.isUserOfficial();
   }
-   getAllElectoralParties() {
-      this.electoralpartyService.getAllElectoralParties().subscribe(
-        (response: any) => {
-          this.parties = response;
-        },
-        (error: any) => {
-          console.error('Error retrieving electoral parties:', error);
-        }
-      );
-
+  getAllElectoralParties() {
+    this.electoralpartyService.getAllElectoralParties().subscribe(
+      (data: ElectoralParty[]) => {
+        this.parties = data;
+      },
+      (error: any) => {
+        console.error('Error retrieving electoral parties:', error);
+      }
+    );
   }
-
   viewElectoralPartyDetails(id: number) {
+    console.log("View party details for id:", id);
     this.router.navigate(['/electoralparties/details', id]);
   }
-
+  
   editElectoralParty(id: number) {
-    this.router.navigate(['/electoralparties/edit', id])
+    console.log("Edit party for id:", id);
+    this.router.navigate(['/electoralparties/edit', id]);
   }
+  
+  
 
 }
