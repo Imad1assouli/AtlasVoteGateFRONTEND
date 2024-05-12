@@ -1,34 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page de Vote</title>
-  <link rel="stylesheet" href="./vote.component.css">
-</head>
-<body>
-<div class="container">
-  <header>
-    <h1>AtlasVoteGate</h1>
-  </header>
-  <main>
-    <section>
-      <h2>Page de Vote</h2>
-      <hr>
-      
-      <!-- Boutons de gestion du vote -->
-      <div class="vote-buttons">
-        <button (click)="lancerVote()">Lancer Vote</button>
-        <button (click)="mettrePause()">Mettre en Pause</button>
-        <button (click)="resumerVote()">Resumer Vote</button>
-        <button (click)="terminerVote()">Terminer Vote</button>
-      </div>
-      
-    </section>
-  </main>
-  <footer>
-    <p>© 2024 AtlasVoteGate</p>
-  </footer>
+<div>
+  <h2>Vote Panel</h2>
+  <div *ngIf="!votingStarted">
+    <button (click)="startVotingProcess()">Start Voting</button>
+  </div>
+  <div *ngIf="votingStarted || votingStarted === undefined">
+   <!-- <button *ngIf="votingStarted" (click)="openDialog()">Update Voting Start Time</button>  -->
+    <button *ngIf="votingStarted" (click)="clearVotingStartTime()">Clear Voting Start Time</button>
+    <button *ngIf="votingStarted && !votingPaused" (click)="pauseVotingProcess()">Pause Voting</button>
+    <button *ngIf="votingStarted && votingPaused" (click)="resumeVotingProcess()">Resume Voting</button>
+    <p *ngIf="votingStartTime">Voting Started At: {{ votingStartTime | date }}</p>
+    <p *ngIf="votingEndTime">Voting Ends At: {{ votingEndTime | date }}</p>
+    <div *ngIf="allowVoting()">
+      <!-- Place voting UI elements here -->
+    </div>
+    <div *ngIf="!allowVoting()">
+      <p>Voting is not currently open or you are not authorized to vote.</p>
+    </div>
+  </div>
 </div>
-</body>
-</html>
