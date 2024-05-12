@@ -4,7 +4,7 @@
     <button (click)="startVotingProcess()">Start Voting</button>
   </div>
   <div *ngIf="votingStarted || votingStarted === undefined">
-   <!-- <button *ngIf="votingStarted" (click)="openDialog()">Update Voting Start Time</button>  -->
+    <!-- <button *ngIf="votingStarted" (click)="openDialog()">Update Voting Start Time</button> -->
     <button *ngIf="votingStarted" (click)="clearVotingStartTime()">Clear Voting Start Time</button>
     <button *ngIf="votingStarted && !votingPaused" (click)="pauseVotingProcess()">Pause Voting</button>
     <button *ngIf="votingStarted && votingPaused" (click)="resumeVotingProcess()">Resume Voting</button>
@@ -15,6 +15,10 @@
     </div>
     <div *ngIf="!allowVoting()">
       <p>Voting is not currently open or you are not authorized to vote.</p>
+    </div>
+    <div *ngIf="votingStarted">
+      <p *ngIf="remainingTime > 0">Time remaining: {{ remainingTime  }}</p>
+      <p *ngIf="remainingTime <= 0">Voting period has ended.</p>
     </div>
   </div>
 </div>
