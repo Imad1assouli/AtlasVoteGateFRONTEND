@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parties Electoraux</title>
-  <link rel="stylesheet" href="./electoralparty.component.css">
-</head>
-<body>
 <!-- electoralparty.component.html -->
 <div class="electoral-party-container">
   <h1>Electoral Parties</h1>
-  <button *ngIf="isUserAdmin()" class="btn btn-add" (click)="addElectoralParty()">Ajouter Partie Eléctoral</button>
+  <button *ngIf="isUserAdmin()" class="btn btn-add" (click)="addElectoralParty()">Add Electoral Party</button>
+  
+  <div *ngIf="(userHasVoted$ | async)" class="alert alert-success">
+    <p><strong>You have already voted</strong></p>
+  </div>
+  
   <ul class="electoral-party-list">
     <li *ngFor="let party of parties">
       {{ party.name }}
       <button class="btn btn-details" (click)="viewElectoralPartyDetails(party.id)">Details</button>
-      <button class="btn btn-edit" (click)="editElectoralParty(party.id)">Modifier</button>
+      <button *ngIf="isUserAdmin()" class="btn btn-edit" (click)="editElectoralParty(party.id)">Edit</button>
     </li>
   </ul>
 </div>
-
-</body>
-</html>

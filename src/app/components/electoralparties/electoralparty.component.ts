@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup} from "@angular/forms";
 import { ElectoralPartyService } from "../../services/electoralparties/electoralparty.service";
 import {Role} from "../../enum/Role.enum";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
+import { VoteService } from '../../services/vote.service';
+import { Utilisateur } from '../../model/Utilisateur.model';
+import { Observable, async } from 'rxjs';
 
 @Component({
   selector: 'app-electoralparties',
@@ -13,14 +16,19 @@ import { AuthenticationService } from "../../services/authentication/authenticat
 })
 export class ElectoralPartyComponent implements OnInit  {
   electoralparty!: ElectoralParty;
-  id: any;
-  parties: any;
+  id!: number;
+  parties: ElectoralParty[]=[];
+  user:Utilisateur={} as Utilisateur;
+  userHasVoted$!: Observable<boolean>;
 
-  constructor(private fb: FormBuilder, public electoralpartyService: ElectoralPartyService,
+  constructor(private fb: FormBuilder, public electoralpartyService: ElectoralPartyService,private voteService :VoteService,
               private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
+    this.userHasVoted$ = this.voteService.hasVoted(this.user.id);
     this.getAllElectoralParties();
+   
   }
 
   addElectoralParty() {
@@ -30,12 +38,15 @@ export class ElectoralPartyComponent implements OnInit  {
   isUserAdmin() {
     return this.authService.isUserAdmin();
   }
+  
+  isUserVoteur(){
+    return this.authService.isUserVoteur();
+  }
 
   isUserOfficial() {
     return this.authService.isUserOfficial();
   }
-
-  private getAllElectoralParties() {
+   getAllElectoralParties() {
       this.electoralpartyService.getAllElectoralParties().subscribe(
         (response: any) => {
           this.parties = response;
