@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Vote } from '../model/Vote.model';
+import { ElectoralParty } from '../model/ElectoralParty.model';
 
 @Injectable({
   providedIn: 'root'
@@ -84,8 +85,8 @@ export class VoteService {
     return this.http.get<Map<string, number>>(`${this.baseUrl}/count/all`);
   }
 
-  getWinningParty(): Observable<string> {
-    return this.http.get<string>(`${this.baseUrl}/winningParty`);
+  getWinningParty(): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/winningParty`);
   }
 
   updateVotingStartTime(newStartTime: Date): Observable<void> {
