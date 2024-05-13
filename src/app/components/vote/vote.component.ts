@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VoteService } from '../../services/vote.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 
@@ -7,11 +7,10 @@ import { AuthenticationService } from '../../services/authentication/authenticat
   templateUrl: './vote.component.html',
   styleUrls: ['./vote.component.css']
 })
-export class VoteComponent implements OnInit, OnDestroy {
+export class VoteComponent implements OnInit {
   votingStarted: boolean = false;
   votingStartTime: Date | undefined;
   votingEndTime: Date | undefined;
-  votingPaused: boolean = false;
   remainingTime: number = 0;
   private countdownInterval: any;
 
@@ -20,30 +19,26 @@ export class VoteComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkVotingStatus();
 
-    if (this.votingStarted && !this.votingPaused) {
+    if (this.votingStarted) {
       this.startCountdown();
     }
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.countdownInterval);
-  }
 
-  clearVotingStartTime(): void {
-    this.voteService.clearVotingStartTime();
-    this.votingStarted = false;
-    clearInterval(this.countdownInterval);
-  }
 
-  pauseVotingProcess(): void {
-    this.voteService.pauseVotingProcess().subscribe(() => {
-      this.votingPaused = true;
-      clearInterval(this.countdownInterval);
-    });
+ 
+  endVote(){
+      this.voteService.endVote().subscribe(() => {
+        this.votingStarted=false;
+        localStorage.setItem('votingStarted', 'false');
+        clearInterval(this.countdownInterval);
+       
+      });
+
   }
 
   allowVoting(): boolean {
-    return this.authService.isLoggedIn() && this.votingStarted && !this.votingPaused;
+    return this.authService.isLoggedIn() && this.votingStarted;
   }
 
   startVotingProcess(): void {
@@ -51,16 +46,12 @@ export class VoteComponent implements OnInit, OnDestroy {
       this.votingStarted = true;
       this.votingStartTime = new Date();
       this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000);
+      localStorage.setItem('votingStarted', 'true');
+      localStorage.setItem('votingStartTime', this.votingStartTime.toString());
       this.startCountdown();
     });
   }
 
-  resumeVotingProcess(): void {
-    this.voteService.resumeVotingProcess().subscribe(() => {
-      this.votingPaused = false;
-      this.startCountdown();
-    });
-  }
 
   startCountdown(): void {
     this.countdownInterval = setInterval(() => {

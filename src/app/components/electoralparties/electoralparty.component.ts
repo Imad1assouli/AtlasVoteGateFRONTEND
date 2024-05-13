@@ -20,6 +20,7 @@ export class ElectoralPartyComponent implements OnInit  {
   parties: ElectoralParty[]=[];
   user:Utilisateur={} as Utilisateur;
   userHasVoted$!: Observable<boolean>;
+  votingStarted: boolean = false; 
 
   constructor(private fb: FormBuilder, public electoralpartyService: ElectoralPartyService,private voteService :VoteService,
               private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
@@ -28,6 +29,7 @@ export class ElectoralPartyComponent implements OnInit  {
     this.getAllElectoralParties();
     this.user = this.authService.getUser();
     this.userHasVoted$ = this.voteService.hasVoted(this.user.id);
+    this.votingStarted = this.voteService.getVotingState(); // Initialize votingStarted
   }
 
   addElectoralParty() {

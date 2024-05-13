@@ -4,9 +4,7 @@
     <button (click)="startVotingProcess()">Start Voting</button>
   </div>
   <div *ngIf="votingStarted || votingStarted === undefined">
-    <button *ngIf="votingStarted" (click)="clearVotingStartTime()">Clear Voting Start Time</button>
-    <button *ngIf="votingStarted && !votingPaused" (click)="pauseVotingProcess()">Pause Voting</button>
-    <button *ngIf="votingStarted && votingPaused" (click)="resumeVotingProcess()">Resume Voting</button>
+    <button *ngIf="votingStarted" (click)="endVote()">Clear Voting Start Time</button>
     <p *ngIf="votingStartTime">Voting Started At: {{ votingStartTime | date }}</p>
     <p *ngIf="votingEndTime">Voting Ends At: {{ votingEndTime | date }}</p>
     <div *ngIf="votingStarted">
