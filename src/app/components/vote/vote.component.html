@@ -5,6 +5,7 @@
   </div>
   <div *ngIf="votingStarted || votingStarted === undefined">
     <button *ngIf="votingStarted" (click)="endVote()">Clear Voting Start Time</button>
+
     <p *ngIf="votingStartTime">Voting Started At: {{ votingStartTime | date }}</p>
     <p *ngIf="votingEndTime">Voting Ends At: {{ votingEndTime | date }}</p>
     <div *ngIf="votingStarted">
