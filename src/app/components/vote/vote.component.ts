@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VoteService } from '../../services/vote.service';
-import { interval } from 'rxjs';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
   styleUrls: ['./vote.component.css']
 })
-export class VoteComponent implements OnInit {
+export class VoteComponent implements OnInit, OnDestroy {
   votingStarted: boolean = false;
   votingStartTime: Date | undefined;
   votingEndTime: Date | undefined;
@@ -16,102 +15,72 @@ export class VoteComponent implements OnInit {
   remainingTime: number = 0;
   private countdownInterval: any;
 
-  constructor(private voteService: VoteService, public dialog: MatDialog) {}
+  constructor(private voteService: VoteService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
-    // Check if voting process is started when the component initializes
-    this.votingStarted = this.voteService.getVotingState();
     this.checkVotingStatus();
 
-    // Start countdown timer if voting has started
-    if (this.votingStarted) {
+    if (this.votingStarted && !this.votingPaused) {
       this.startCountdown();
     }
   }
 
-  // Method to start the voting process
+  ngOnDestroy(): void {
+    clearInterval(this.countdownInterval);
+  }
+
+  clearVotingStartTime(): void {
+    this.voteService.clearVotingStartTime();
+    this.votingStarted = false;
+    clearInterval(this.countdownInterval);
+  }
+
+  pauseVotingProcess(): void {
+    this.voteService.pauseVotingProcess().subscribe(() => {
+      this.votingPaused = true;
+      clearInterval(this.countdownInterval);
+    });
+  }
+
+  allowVoting(): boolean {
+    return this.authService.isLoggedIn() && this.votingStarted && !this.votingPaused;
+  }
+
   startVotingProcess(): void {
     this.voteService.startVotingProcess().subscribe(() => {
-      this.voteService.setVotingState(true); // Set the voting state to true
-      this.votingStartTime = new Date(); // Set the voting start time
       this.votingStarted = true;
-      this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000); // Set end time (one day after start)
-      localStorage.setItem('votingStarted', 'true');
-      localStorage.setItem('votingStartTime', this.votingStartTime.toString()); // Store start time in local storage
-
-      // Start countdown timer
+      this.votingStartTime = new Date();
+      this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000);
       this.startCountdown();
     });
   }
 
-  // Method to pause the voting process
-  pauseVotingProcess(): void {
-    this.voteService.pauseVotingProcess().subscribe(() => {
-      this.voteService.setVotingState(false); // Set the voting state to false
-      this.votingPaused = true;
-      clearInterval(this.countdownInterval); // Stop the countdown timer
-    });
-  }
-
-  // Method to resume the voting process
   resumeVotingProcess(): void {
     this.voteService.resumeVotingProcess().subscribe(() => {
-      this.voteService.setVotingState(true); // Set the voting state to true
       this.votingPaused = false;
-      this.startCountdown(); // Restart the countdown timer
+      this.startCountdown();
     });
   }
 
-  // Method to start the countdown timer
   startCountdown(): void {
     this.countdownInterval = setInterval(() => {
       const now = new Date().getTime();
       const endTime = this.votingEndTime?.getTime() || 0;
       this.remainingTime = endTime - now;
       if (this.remainingTime <= 0) {
-        clearInterval(this.countdownInterval); // Stop the countdown timer when time is up
+        clearInterval(this.countdownInterval);
       }
     }, 1000);
   }
 
-  // Method to check the current voting status
   checkVotingStatus(): void {
-    const votingStarted = localStorage.getItem('votingStarted');
-    if (votingStarted && votingStarted === 'true') {
-      this.voteService.setVotingState(true);
+    this.votingStarted = this.voteService.getVotingState();
+    if (this.votingStarted) {
       const startTime = localStorage.getItem('votingStartTime');
       if (startTime) {
         this.votingStartTime = new Date(startTime);
-        this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000); // Set end time (one day after start)
+        this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000);
       }
     }
-  }
-
-  // Method to clear the voting start time from local storage
-  clearVotingStartTime(): void {
-    localStorage.removeItem('votingStarted');
-    localStorage.removeItem('votingStartTime');
-    this.votingStartTime = undefined;
-    this.votingEndTime = undefined;
-    this.votingStarted = false;
-    clearInterval(this.countdownInterval); // Stop the countdown timer
-  }
-
-  // Method to update the voting start time
-  updateVotingStartTime(newStartTime: Date): void {
-    this.voteService.updateVotingStartTime(newStartTime).subscribe(() => {
-      this.votingStartTime = newStartTime;
-    });
-  }
-
-  // Method to open dialog for updating voting start time
-  openDialog(): void {
-    // Implement this method to open a dialog for updating voting start time
-  }
-
-  // Method to allow voting for authenticated users
-  allowVoting(): boolean {
-    // Implement this method based on your authentication logic
-    return true;
   }
 }

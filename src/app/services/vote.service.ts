@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 import { Vote } from '../model/Vote.model';
 
 @Injectable({
@@ -14,28 +14,45 @@ export class VoteService {
   constructor(private http: HttpClient) {}
   private votingStartedKey = 'votingStarted';
 
-
-  // Method to set the voting state
   setVotingState(started: boolean) {
     localStorage.setItem(this.votingStartedKey, started ? 'true' : 'false');
-    
   }
 
-  // Method to get the voting state
   getVotingState(): boolean {
     const started = localStorage.getItem(this.votingStartedKey);
     return started === 'true';
   }
-  
+
+  clearVotingStartTime(): void {
+    localStorage.removeItem('votingStarted');
+    localStorage.removeItem('votingStartTime');
+    this.votingStarted = false;
+  }
+
+  pauseVotingProcess(): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/pauseVotingProcess`, {}).pipe(
+      tap(() => {
+        this.setVotingState(false);
+      })
+    );
+  }
+
+  resumeVotingProcess(): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/resumeVotingProcess`, {}).pipe(
+      tap(() => {
+        this.setVotingState(true);
+      })
+    );
+  }
+
   hasVoted(userId: number): Observable<boolean> {
     return this.http.get<boolean>(`http://localhost:8080/api/voter/votes/${userId}`);
   }
-  
-  
 
   createVote(userId: number, partyId: number) {
     return this.http.post<any>(`${this.backendHost}/votes/${userId}/${partyId}`, {});
   }
+
   getVoteById(id: number): Observable<Vote> {
     return this.http.get<Vote>(`${this.baseUrl}/${id}`);
   }
@@ -68,32 +85,15 @@ export class VoteService {
     return this.http.get<string>(`${this.baseUrl}/winningParty`);
   }
 
-  
-
   updateVotingStartTime(newStartTime: Date): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/updateVotingStartTime`, newStartTime);
   }
 
-  // Method to start the voting process
   startVotingProcess(): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/startVotingProcess`, {});
   }
 
-  // Method to pause the voting process
-  pauseVotingProcess(): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/pauseVotingProcess`, {});
+  getElectoralParties(): Observable<any> {
+    return this.http.get('http://localhost:8080/api/admin/electoralparties');
   }
-
-  // Method to resume the voting process
-  resumeVotingProcess(): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/resumeVotingProcess`, {});
-  }
-
-  // Method to check if the voting process is started
-  isVotingStarted(): boolean {
-    return this.votingStarted;
-  }
-
-  // Method to set the voting state
-
 }

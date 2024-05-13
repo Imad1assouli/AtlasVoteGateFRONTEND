@@ -15,6 +15,15 @@
     <section>
       <h2>Bienvenue sur AtlasVoteGate</h2>
       <hr>
+      <div *ngIf="electoralParties">
+  <h1>Electoral Parties Statistics</h1>
+  <ul>
+    <li *ngFor="let party of electoralParties | keyvalue">
+      {{ party.key }}: {{ party.value }}
+    </li>
+  </ul>
+</div>
+
       <p>Explore the frontier of voting technology.</p>
     </section>
   </main>
