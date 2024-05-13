@@ -29,6 +29,9 @@ export class VoteService {
     this.votingStarted = false;
   }
 
+  
+
+  
   pauseVotingProcess(): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/pauseVotingProcess`, {}).pipe(
       tap(() => {
@@ -94,6 +97,6 @@ export class VoteService {
   }
 
   getElectoralParties(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/admin/electoralparties');
+    return this.http.get('http://localhost:8080/api/admin/electoralPart');
   }
 }
