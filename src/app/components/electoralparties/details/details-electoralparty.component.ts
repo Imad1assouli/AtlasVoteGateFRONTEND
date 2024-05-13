@@ -85,7 +85,7 @@ export class DetailsElectoralPartyComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result && this.voteLance() ) {
+      if (result ) {
         this.voteService.createVote(userId, partyId).subscribe({
           next: () => {
             this.router.navigate(['/electoralparties']);
@@ -99,9 +99,5 @@ export class DetailsElectoralPartyComponent implements OnInit {
   }
 
   
-  voteLance() :boolean {
-      return this.voteService.votestarted;
-        
-      }
-    
+  
 }

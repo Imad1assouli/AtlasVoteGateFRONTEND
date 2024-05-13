@@ -10,6 +10,7 @@ export class VoteService {
   private baseUrl = 'http://localhost:8080/api/admin/votes';
   private backendHost = "http://localhost:8080/api/voter";
   private votingStarted = false;
+  votestarted: boolean | undefined;
 
   constructor(private http: HttpClient) {}
   private votingStartedKey = 'votingStarted';
