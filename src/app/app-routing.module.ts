@@ -15,6 +15,9 @@ import {EditElectoralPartyComponent} from "./components/electoralparties/edit/ed
 import { ViewComponent } from './components/appointments/view/view.component';
 import { EditComponent } from './components/utilisateurs/edit/edit.component';
 import { VoteComponent } from './components/vote/vote.component';
+import { AuthGuard } from './services/guards/auth.guard';
+import { AdminGuard } from './services/guards/admin.guard';
+import { FonctionnaireGuard } from './services/guards/fonctionnaire.guard';
 
 
 const routes: Routes = [
@@ -22,18 +25,18 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'appointments', component: AppointmentComponent },
-  { path: 'appointments/add', component: AddAppointmentComponent }, // Route for adding appointments
-  { path: 'appointments/edit/:id', component: EditAppointmentComponent },
-  { path: 'appointments/view/:id', component: ViewComponent },
+  { path: 'appointments', component: AppointmentComponent ,canActivate: [FonctionnaireGuard,AdminGuard]},
+  { path: 'appointments/add', component: AddAppointmentComponent,canActivate: [AdminGuard] }, // Route for adding appointments
+  { path: 'appointments/edit/:id', component: EditAppointmentComponent,canActivate: [AuthGuard,AdminGuard] },
+  { path: 'appointments/view/:id', component: ViewComponent,canActivate: [AuthGuard,FonctionnaireGuard,AdminGuard] },
   { path: 'electoralparties', component: ElectoralPartyComponent },
-  { path: 'electoralparties/add', component: AddElectoralPartyComponent },
+  { path: 'electoralparties/add', component: AddElectoralPartyComponent,canActivate: [AuthGuard,AdminGuard] },
   { path: 'electoralparties/details/:id', component: DetailsElectoralPartyComponent },
-  { path: 'electoralparties/edit/:id', component: EditElectoralPartyComponent },
-  { path: 'utilisateurs', component: UtilisateurComponent },
-  { path: 'utilisateurs/add', component: AddUtilisateurComponent },
-  { path: 'utilisateurs/edit/:id', component: EditComponent },
-  { path: 'vote', component: VoteComponent },
+  { path: 'electoralparties/edit/:id', component: EditElectoralPartyComponent,canActivate: [AdminGuard] },
+  { path: 'utilisateurs', component: UtilisateurComponent,canActivate: [AdminGuard] },
+  { path: 'utilisateurs/add', component: AddUtilisateurComponent,canActivate: [AdminGuard] },
+  { path: 'utilisateurs/edit/:id', component: EditComponent,canActivate: [AdminGuard] },
+  { path: 'vote', component: VoteComponent,canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' } // fallback route
 ];
 
