@@ -22,6 +22,7 @@ export class DetailsElectoralPartyComponent implements OnInit {
   id!: number;
   user: Utilisateur = {} as Utilisateur;
   userHasVoted$!: Observable<boolean>;
+  votingStarted: boolean = false; // Define votingStarted property
 
   constructor(
     private voteService: VoteService,
@@ -40,6 +41,7 @@ export class DetailsElectoralPartyComponent implements OnInit {
     });
     this.user = this.authService.getUser();
     this.userHasVoted$ = this.voteService.hasVoted(this.user.id);
+    this.votingStarted = this.voteService.getVotingState(); // Initialize votingStarted
   }
 
   loadPartyDetails(): void {
@@ -56,7 +58,8 @@ export class DetailsElectoralPartyComponent implements OnInit {
   isUserAdmin() {
     return this.authService.isUserAdmin();
   }
-  isUserVoteur(){
+
+  isUserVoteur() {
     return this.authService.isUserVoteur();
   }
 

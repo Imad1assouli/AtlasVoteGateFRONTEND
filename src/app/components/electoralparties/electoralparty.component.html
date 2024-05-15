@@ -3,7 +3,7 @@
   <h1>Electoral Parties</h1>
   <button *ngIf="isUserAdmin()" class="btn btn-add" (click)="addElectoralParty()">Add Electoral Party</button>
   
-  <div *ngIf="(userHasVoted$ | async)" class="alert alert-success">
+  <div *ngIf="votingStarted && (userHasVoted$ | async)" class="alert alert-success">
     <p><strong>You have already voted</strong></p>
   </div>
   

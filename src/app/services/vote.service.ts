@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Vote } from '../model/Vote.model';
 
 @Injectable({
@@ -89,10 +89,13 @@ export class VoteService {
   resumeVotingProcess(): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/resumeVotingProcess`, {});
   }
+  endVote(): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/endVotingProcess`, {});
+  }
 
-  // Method to check if the voting process is started
-  isVotingStarted(): boolean {
-    return this.votingStarted;
+   
+  getElectoralParties(): Observable<any> {
+    return this.http.get('http://localhost:8080/api/admin/electoralPart');
   }
 
   // Method to set the voting state
