@@ -20,6 +20,7 @@ import { AdminGuard } from './services/guards/admin.guard';
 import { FonctionnaireGuard } from './services/guards/fonctionnaire.guard';
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },

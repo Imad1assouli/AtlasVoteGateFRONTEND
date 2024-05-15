@@ -11,8 +11,15 @@ export class VoteService {
   private backendHost = "http://localhost:8080/api/voter";
   private votingStarted = false;
 
-  constructor(private http: HttpClient) {}
+  private voteingEnded =false;
   private votingStartedKey = 'votingStarted';
+  private votingEndedKey ='votingEnded';
+
+  votestarted: boolean | undefined;
+
+
+  constructor(private http: HttpClient) {}
+  
 
 
   // Method to set the voting state
@@ -21,10 +28,23 @@ export class VoteService {
     
   }
 
+  setVotingEnded(ended: boolean) {
+    localStorage.setItem(this.votingEndedKey, ended ? 'true' : 'false');
+  }
+  
+
   // Method to get the voting state
   getVotingState(): boolean {
     const started = localStorage.getItem(this.votingStartedKey);
     return started === 'true';
+  }
+  
+
+  // Method to get the voting state
+  getVotingEnded(): boolean {
+    
+    const ended = localStorage.getItem(this.votingEndedKey);
+    return ended === 'true';
   }
   
   hasVoted(userId: number): Observable<boolean> {
@@ -96,6 +116,12 @@ export class VoteService {
   getElectoralParties(): Observable<any> {
     return this.http.get('http://localhost:8080/api/admin/electoralPart');
   }
+
+  // vote.service.ts
+
+clearVotingStatus() {
+  this.setVotingEnded(false); // Réinitialise l'état de fin de vote à false
+}
 
   // Method to set the voting state
 

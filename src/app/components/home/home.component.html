@@ -15,19 +15,19 @@
     <section>
       <h2>Bienvenue sur AtlasVoteGate</h2>
       <hr>
-      <h1>the winning party : {{electroParty.name}}</h1>
-      <div *ngIf="electoralParties">
-  <h1>Electoral Parties Statistics</h1>
-  <ul>
-    <li *ngFor="let party of electoralParties | keyvalue">
-      {{ party.key }}: {{ party.value }}
-    </li>
-  </ul>
-</div>
-
-      <p>Explore the frontier of voting technology.</p>
+      <h1 *ngIf="!getVotingState() || getVotingEnded()">Le parti gagnant : {{ electroParty.name }}</h1>
+      <div *ngIf="!getVotingState() || getVotingEnded()">
+        <h1>Statistiques des partis électoraux</h1>
+        <ul>
+          <li *ngFor="let party of electoralParties | keyvalue">
+            {{ party.key }}: {{ party.value }}
+          </li>
+        </ul>
+      </div>
+      <p >Explorez la frontière de la technologie de vote.</p>
     </section>
   </main>
+  
   <footer>
     <p>© 2024 AtlasVoteGate</p>
   </footer>

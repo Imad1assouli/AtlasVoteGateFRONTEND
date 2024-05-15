@@ -45,8 +45,9 @@ export class VoteComponent implements OnInit {
     this.voteService.startVotingProcess().subscribe(() => {
       this.votingStarted = true;
       this.votingStartTime = new Date();
-      this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000);
+      this.votingEndTime = new Date(this.votingStartTime.getTime() +  60 * 1000);
       localStorage.setItem('votingStarted', 'true');
+      localStorage.setItem('votingEnded', 'false');
       localStorage.setItem('votingStartTime', this.votingStartTime.toString());
       this.startCountdown();
     });
@@ -59,8 +60,10 @@ export class VoteComponent implements OnInit {
       const endTime = this.votingEndTime?.getTime() || 0;
       this.remainingTime = endTime - now;
       if (this.remainingTime <= 0) {
+        localStorage.setItem('votingEnded', 'true');
         clearInterval(this.countdownInterval);
       }
+
     }, 1000);
   }
 
@@ -70,8 +73,9 @@ export class VoteComponent implements OnInit {
       const startTime = localStorage.getItem('votingStartTime');
       if (startTime) {
         this.votingStartTime = new Date(startTime);
-        this.votingEndTime = new Date(this.votingStartTime.getTime() + 24 * 60 * 60 * 1000);
+        this.votingEndTime = new Date(this.votingStartTime.getTime() +  60 * 1000);
       }
     }
   }
+
 }
