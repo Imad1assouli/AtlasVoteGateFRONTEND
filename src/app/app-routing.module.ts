@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'utilisateurs', component: UtilisateurComponent,canActivate: [AdminGuard] },
   { path: 'utilisateurs/add', component: AddUtilisateurComponent,canActivate: [AdminGuard] },
   { path: 'utilisateurs/edit/:id', component: EditComponent,canActivate: [AdminGuard] },
-  { path: 'vote', component: VoteComponent,canActivate: [AuthGuard] },
+  { path: 'vote', component: VoteComponent,canActivate: [AdminGuard] },
   { path: '**', redirectTo: '' } // fallback route
 ];
 
