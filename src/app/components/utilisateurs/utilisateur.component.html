@@ -3,39 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Appointments</title>
+  <title>Users</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng/resources/themes/saga-blue/theme.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng/resources/primeng.min.css">
   <link rel="stylesheet" href="./utilisateur.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
-  <body>
-    <!-- utilisateurs.component.html -->
-    <div class="users-container">
-      <h1>Utilisateurs</h1>
-      <button class="btn btn-add" (click)="addUtilisateur()">Add User</button>
-      <table class="users-table">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Last Name</th>
-          <th>First Name</th>
-          <th>Login</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let utilisateur of utilisateurs">
-          <td>{{ utilisateur.id }}</td>
-          <td>{{ utilisateur.nom }}</td>
-          <td>{{ utilisateur.prenom }}</td>
-          <td>{{ utilisateur.login }}</td>
-          <td>{{ utilisateur.role }}</td>
-          <td>
-            <button class="btn btn-edit" (click)="onUpdate(utilisateur.id)">Edit</button>
-            <button class="btn btn-delete" (click)="onDelete(utilisateur.id)">Delete</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+<body>
+<nb-layout>
+  <nb-layout-header fixed>
+  </nb-layout-header>
+  <nb-layout-column>
+    <div class="breadcrumb-section">
+      <ul class="breadcrumbs">
+        <li>
+          <a>AtlasVoteGate</a>
+        </li>
+        <li>
+          <i class="pi pi-angle-right"></i>
+        </li>
+        <li>
+          <span>User Management</span>
+        </li>
+      </ul>
+      <button pButton type="button" label="Add User" icon="pi pi-plus" class="btn-add" (click)="addUtilisateur()"></button>
     </div>
+
+    <div class="user-management">
+      <div class="user-list">
+        <p-card *ngFor="let utilisateur of utilisateurs" class="user-card">
+          <ng-template pTemplate="header">
+            <h2>{{utilisateur.nom}} {{utilisateur.prenom}}</h2>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <div class="user-details">
+          <span class="user-info">
+            <i class="pi pi-users"></i>
+            {{utilisateur.login}}
+          </span>
+              <span class="user-info">
+            <i class="pi pi-globe"></i>
+                {{utilisateur.role}}
+          </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="user-actions">
+              <button pButton type="button" label="Edit" icon="pi pi-pencil" class="btn-edit" (click)="onUpdate(utilisateur.id)"></button>
+              <button pButton type="button" label="Delete" icon="pi pi-trash" class="btn-delete" (click)="onDelete(utilisateur.id)"></button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/primeng/resources/primeng.min.js"></script>
+  </nb-layout-column>
+</nb-layout>
 </body>
 </html>

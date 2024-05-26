@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Modifier Utilisateur</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../add/add-utilisateur.component.css">
 </head>
 <body>
-<!-- add-utilisateur.component.html -->
 <div class="add-user-container">
   <h1>Update User</h1>
-  <form  #useForm="ngForm" (ngSubmit)="onSubmit()">
+  <form #useForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-field">
       <label for="nom">Nom:</label>
       <input type="text" id="nom" name="nom" [(ngModel)]="utilisateur.nom" required>
@@ -29,6 +29,5 @@
     <button type="submit" class="btn btn-submit" [disabled]="!useForm.valid">Modifier</button>
   </form>
 </div>
-
 </body>
 </html>

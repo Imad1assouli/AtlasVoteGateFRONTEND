@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modifier Partie Eléctoral</title>
+  <title>Edit Electoral Party</title>
+  <link rel="stylesheet" href="./edit-electoralparty.component.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Modifier</h1>
-    <form (ngSubmit)="onSubmit()"  #electoralpartyForm="ngForm">
-      <div class="form-field">
-        <label for="name">Nom</label>
-        <input type="text" id="name" name="name" [(ngModel)]="electoralparty.name" required>
-      </div>
-      <div class="form-field">
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description" [(ngModel)]="electoralparty.description" required>
-      </div>
-      <button type="submit" class="btn btn-submit" [disabled]="!electoralpartyForm.valid">Modifier</button>
-    </form>
-  </div>
+<nb-layout>
+  <nb-layout-header fixed></nb-layout-header>
+  <nb-layout-column>
+    <div class="container">
+      <h1>Edit Electoral Party</h1>
+      <form (ngSubmit)="onSubmit()" #electoralpartyForm="ngForm">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter party name" [(ngModel)]="electoralparty.name" required>
+        </div>
+        <div class="form-field">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" placeholder="Enter description" [(ngModel)]="electoralparty.description" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" [disabled]="!electoralpartyForm.valid">Update</button>
+      </form>
+    </div>
+  </nb-layout-column>
+</nb-layout>
 </body>
 </html>

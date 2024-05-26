@@ -9,7 +9,6 @@ import { Role } from '../../../enum/Role.enum';
 @Component({
   selector: 'app-add-utilisateur',
   templateUrl: './add-utilisateur.component.html',
-  styleUrls: ['./add-utilisateur.component.css']
 })
 export class AddUtilisateurComponent implements OnInit {
 
@@ -31,9 +30,9 @@ export class AddUtilisateurComponent implements OnInit {
   ){}
   ngOnInit(): void {
   }
-  
+
   onSubmit(): void {
-   
+
       this.userService.addUtilisateur(this.utilisateur).subscribe({
         next: () => {
           this.router.navigate(['/utilisateurs']);
@@ -43,7 +42,7 @@ export class AddUtilisateurComponent implements OnInit {
         }
       });
     }
-  
+
 }
 
 
