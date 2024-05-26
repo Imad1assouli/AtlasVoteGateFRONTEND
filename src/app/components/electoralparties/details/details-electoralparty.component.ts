@@ -55,6 +55,9 @@ export class DetailsElectoralPartyComponent implements OnInit {
       }
     );
   }
+  getVotingEnded():boolean{
+    return this.voteService.getVotingEnded();
+  }
 
   isUserAdmin() {
     return this.authService.isUserAdmin();
