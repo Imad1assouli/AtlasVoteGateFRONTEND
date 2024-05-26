@@ -12,7 +12,6 @@ import { Observable, async } from 'rxjs';
 @Component({
   selector: 'app-electoralparties',
   templateUrl: './electoralparty.component.html',
-  styleUrls: ['./electoralparty.component.css']
 })
 export class ElectoralPartyComponent implements OnInit  {
   electoralparty!: ElectoralParty;
@@ -20,7 +19,7 @@ export class ElectoralPartyComponent implements OnInit  {
   parties: ElectoralParty[]=[];
   user:Utilisateur={} as Utilisateur;
   userHasVoted$!: Observable<boolean>;
-  votingStarted: boolean = false; 
+  votingStarted: boolean = false;
 
   constructor(private fb: FormBuilder, public electoralpartyService: ElectoralPartyService,private voteService :VoteService,
               private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
@@ -39,7 +38,7 @@ export class ElectoralPartyComponent implements OnInit  {
   isUserAdmin() {
     return this.authService.isUserAdmin();
   }
-  
+
   isUserVoteur(){
     return this.authService.isUserVoteur();
   }
@@ -61,12 +60,12 @@ export class ElectoralPartyComponent implements OnInit  {
     console.log("View party details for id:", id);
     this.router.navigate(['/electoralparties/details', id]);
   }
-  
+
   editElectoralParty(id: number) {
     console.log("Edit party for id:", id);
     this.router.navigate(['/electoralparties/edit', id]);
   }
-  
-  
+
+
 
 }

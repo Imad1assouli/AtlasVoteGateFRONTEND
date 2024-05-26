@@ -31,7 +31,7 @@ export class DetailsElectoralPartyComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private authService: AuthenticationService,
-    
+
   ) {}
 
   ngOnInit(): void {
@@ -101,6 +101,6 @@ export class DetailsElectoralPartyComponent implements OnInit {
     });
   }
 
-  
-  
+
+
 }

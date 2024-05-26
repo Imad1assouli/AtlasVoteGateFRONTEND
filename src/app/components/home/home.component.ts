@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { VoteService } from '../../services/vote.service';
-import { ElectoralParty } from '../../model/ElectoralParty.model';
+import {Component, OnInit} from '@angular/core';
+import {ElectoralParty} from "../../model/ElectoralParty.model";
+import {VoteService} from "../../services/vote.service";
 
 @Component({
   selector: 'app-home',
@@ -26,13 +26,13 @@ export class HomeComponent implements OnInit {
     this.getVotingEnded();
   }
 
-  
+
   getVotingEnded():boolean{
     return this.voteService.getVotingEnded();
 
   }
   getVotingState(): boolean {
     return this.voteService.getVotingState();
-    
+
 }
 }
