@@ -4,13 +4,13 @@
     <h3>{{ party.name }}</h3>
     <p>{{ party.description }}</p>
     <button *ngIf="isUserAdmin()" class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
-    
-    <button *ngIf="votingStarted && !(userHasVoted$ | async) && isUserVoteur()" class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
-    
+
+    <button *ngIf="votingStarted && !(userHasVoted$ | async) && isUserVoteur() " class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
+
     <div *ngIf="!votingStarted" class="alert alert-warning">
       <p><strong>Voting has not started yet.</strong></p>
     </div>
-    
+
     <div *ngIf="votingStarted && (userHasVoted$ | async) && isUserVoteur()" class="alert alert-success">
       <p><strong>You have already voted</strong></p>
     </div>
