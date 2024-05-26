@@ -106,3 +106,13 @@
 body {
   font-family: 'Raleway', sans-serif;
 }
+.btn-details-custom {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+

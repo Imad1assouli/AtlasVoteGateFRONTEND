@@ -1,15 +1,22 @@
 <!-- details-electoralparty.component.html -->
-<div class="details-electoral-party-container">
-  <h2>Electoral Party Details</h2>
-  <div class="party-details">
-    <h3>{{ party.name }}</h3>
-    <p>{{ party.description }}</p>
-    <button *ngIf="isUserAdmin()" class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
+<nb-layout>
+  <nb-layout-header fixed>
+  </nb-layout-header>
+  <nb-layout-column>
+    <div class="details-electoral-party-container">
+      <h2>Electoral Party Details</h2>
+      <div class="party-details">
+        <h3>{{ party.name }}</h3>
+        <p>{{ party.description }}</p>
+        <button *ngIf="isUserAdmin()" class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
 
-    <button *ngIf="!(userHasVoted$ | async) && isUserVoteur()" class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
+        <button *ngIf="!(userHasVoted$ | async) && isUserVoteur()" class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
 
-    <div *ngIf="(userHasVoted$ | async) && isUserVoteur()" class="alert alert-success">
-      <p><strong>You have already voted</strong></p>
+        <div *ngIf="(userHasVoted$ | async) && isUserVoteur()" class="alert alert-success">
+          <p><strong>You have already voted</strong></p>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </nb-layout-column>
+
+</nb-layout>
