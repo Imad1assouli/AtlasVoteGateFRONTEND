@@ -40,7 +40,7 @@
         </div>
         <div class="party-actions">
           <p-button type="button" label="Details" icon="pi pi-info-circle" class="btn-details" (click)="viewElectoralPartyDetails(party.id)"></p-button>
-          <p-button *ngIf="isUserAdmin()" type="button" label="Edit" icon="pi pi-pencil" class="btn-edit" (click)="editElectoralParty(party.id)"></p-button>
+          <button *ngIf="isUserAdmin()" type="button" label="Edit" icon="pi pi-pencil" class="btn-edit" (click)="editElectoralParty(party.id)"></button>
         </div>
       </li>
     </ul>

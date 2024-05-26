@@ -10,6 +10,7 @@ import { ConfirmationDialogComponent } from '../../appointments/dialog/confirmat
 import { Observable } from 'rxjs';
 import { VoteComponent } from '../../vote/vote.component';
 import { Injectable } from '@angular/core';
+import { HomeComponent } from '../../home/home.component';
 
 
 @Component({
