@@ -1,64 +1,80 @@
-/* appointment.component.css */
-.app-container {
-  max-width: 800px;
-  margin: auto;
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.breadcrumb-section {
   padding: 20px;
-  font-family: Arial, sans-serif;
-  color: #333;
-}
-
-h1 {
-  color: #000;
-  text-align: center;
-}
-
-.btn {
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 5px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-add {
-  background-color: #007aff;
-  color: white;
-}
-
-.btn-edit {
-  background-color: #ff9500;
-  color: white;
-}
-
-.btn-delete {
-  background-color: #ff3b30;
-  color: white;
-}
-
-.btn:hover {
-  opacity: 0.8;
-}
-
-.appointment-list {
-  list-style: none;
-  padding: 0;
-}
-
-.appointment-list li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  background-color: #f4f4f4;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.appointment-list li:last-child {
-  border-bottom: none;
+.breadcrumbs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #666;
 }
 
-.noAppointments {
-  text-align: center;
-  color: #666;
+.breadcrumbs li {
+  margin-right: 10px;
+}
+
+.breadcrumbs a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.appointment-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.appointment-card {
+  background: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex: 1 1 300px;
+}
+
+.appointment-card h2 {
+  margin: 0;
+  color: #333;
+}
+
+.actions {
+  display: flex;
+  margin-top: 15px;
+}
+
+.actions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.875rem;
+}
+
+.actions button:nth-last-child(1) {
+  margin-right: 0;
 }

@@ -4,33 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AtlasVoteGate</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./home.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="breadcrumb-section">
+  <ul class="breadcrumbs">
+    <li>
+      <a>AtlasVoteGate</a>
+    </li>
+    <li>
+      <i class="pi pi-angle-right"></i>
+    </li>
+    <li>
+      <span>Home</span>
+    </li>
+  </ul>
+</div>
+
 <div class="container">
-  <header>
-    <h1>AtlasVoteGate</h1>
-  </header>
-  <main>
-    <section>
-      <h2>Bienvenue sur AtlasVoteGate</h2>
-      <hr>
-      <h1 *ngIf="!getVotingState() || getVotingEnded()">Le parti gagnant : {{ electroParty.name }}</h1>
-      <div *ngIf="!getVotingState() || getVotingEnded()">
-        <h1>Statistiques des partis électoraux</h1>
-        <ul>
-          <li *ngFor="let party of electoralParties | keyvalue">
-            {{ party.key }}: {{ party.value }}
-          </li>
-        </ul>
+  <div class="content">
+    <div class="home-card">
+      <h1 class="card-title">Bienvenue sur AtlasVoteGate</h1>
+      <hr class="divider">
+      <div class="card-content">
+        <h1 *ngIf="!getVotingState() || getVotingEnded()" class="winner-text">Le parti gagnant : {{ electroParty.name }}</h1>
+        <div *ngIf="!getVotingState() || getVotingEnded()">
+          <h2 class="stats-title">Statistiques des partis électoraux</h2>
+          <ul class="party-stats">
+            <li *ngFor="let party of electoralParties | keyvalue">
+              <span class="party-name">{{ party.key }}: </span><span class="party-value">{{ party.value }}</span>
+            </li>
+          </ul>
+        </div>
+        <p class="explore-text">Explorez la frontière de la technologie de vote.</p>
       </div>
-      <p >Explorez la frontière de la technologie de vote.</p>
-    </section>
-  </main>
-  
-  <footer>
-    <p>© 2024 AtlasVoteGate</p>
-  </footer>
+    </div>
+  </div>
 </div>
 </body>
 </html>

@@ -10,9 +10,9 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 
 export class UtilisateurService {
- 
+
   private backendHost = "http://localhost:8080/api/admin";
-  
+
 
   constructor(private http: HttpClient,private authenticationService: AuthenticationService) {}
 
@@ -34,5 +34,9 @@ export class UtilisateurService {
   }
   public updateUtilisateur (id:number,user: Utilisateur):Observable<Utilisateur>{
     return this.http.put<Utilisateur>(`${this.backendHost}/users/` + id , user);
+  }
+
+  totalnumberUtilisateurs() {
+    return this.http.get(this.backendHost + '/totalnumberUtilisateurs');
   }
 }

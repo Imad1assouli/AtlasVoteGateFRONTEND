@@ -1,40 +1,92 @@
-/* signup.component.css */
-.signup-container {
-  width: 100%;
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  background-color: #fff;
+/* Basic Reset */
+* {
+  margin: auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.form-field {
-  margin-bottom: 20px;
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.surface-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.header h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.header a {
+  color: #0061df;
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+.form-group {
+  margin-bottom: 1rem;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  color: #666;
 }
 
-input[type="text"], input[type="email"], select {
+input[type="text"], input[type="password"], input[type="email"], input[type="datetime-local"] {
   width: 100%;
-  padding: 8px;
+  padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 16px;
 }
 
-.btn-signup {
-  padding: 10px 20px;
-  color: white;
-  background-color: #007bff;
+input:focus {
+  border-color: #0061df;
+  outline: none;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
   border: none;
+  background-color: #0061df;
+  color: white;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.btn-signup:hover {
-  background-color: #0056b3;
+.btn:hover {
+  background-color: #004cab;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
 }

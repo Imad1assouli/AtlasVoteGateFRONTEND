@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Ajouter Partie Eléctoral</title>
+  <link rel="stylesheet" href="./add-electoralparty.component.css">
 </head>
 <body>
-<!-- add-electoralparty.component.html -->
-<div class="add-electoral-party-container">
-  <h2>Add New Electoral Party</h2>
-  <form (ngSubmit)="onSubmit()"  #electoralpartyForm="ngForm">
-    <div class="form-field">
-      <label for="nom">Nom Partie Eléctoral:</label>
-      <input type="text" id="nom" name="nom" placeholder="Entrer nom de la partie éléctoral" [(ngModel)]="electoralparty.name" required>
+<nb-layout>
+  <nb-layout-header fixed>
+  </nb-layout-header>
+  <nb-layout-column>
+    <div class="add-electoral-party-container">
+      <h2>Add New Electoral Party</h2>
+      <form (ngSubmit)="onSubmit()"  #electoralpartyForm="ngForm">
+        <div class="form-field">
+          <label for="nom">Nom Partie Eléctoral:</label>
+          <input type="text" id="nom" name="nom" placeholder="Entrer nom de la partie éléctoral" [(ngModel)]="electoralparty.name" required>
+        </div>
+        <div class="form-field">
+          <label for="description">Description:</label>
+          <input type="text" id="description" name="description" placeholder="Entrer description" [(ngModel)]="electoralparty.description" required>
+        </div>
+        <button type="submit" class="btn btn-submit" [disabled]="!electoralpartyForm.valid">Ajouter</button>
+      </form>
     </div>
-    <div class="form-field">
-      <label for="description">Description:</label>
-      <input type="text" id="description" name="description" placeholder="Entrer description" [(ngModel)]="electoralparty.description" required>
-    </div>
-    <button type="submit" class="btn btn-submit" [disabled]="!electoralpartyForm.valid">Ajouter</button>
-  </form>
-</div>
+  </nb-layout-column>
+</nb-layout>
 </body>
 </html>

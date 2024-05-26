@@ -18,6 +18,7 @@ import { VoteComponent } from './components/vote/vote.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { AdminGuard } from './services/guards/admin.guard';
 import { FonctionnaireGuard } from './services/guards/fonctionnaire.guard';
+import {adminORfonctGuardGuard} from "./services/guards/admin-orfonct-guard.guard";
 
 
 
@@ -26,10 +27,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'appointments', component: AppointmentComponent ,canActivate: [AdminGuard]},
+
+  { path: 'appointments', component: AppointmentComponent ,canActivate: [adminORfonctGuardGuard]},
   { path: 'appointments/add', component: AddAppointmentComponent,canActivate: [AdminGuard] }, // Route for adding appointments
   { path: 'appointments/edit/:id', component: EditAppointmentComponent,canActivate: [AuthGuard,AdminGuard] },
-  { path: 'appointments/view/:id', component: ViewComponent,canActivate: [AuthGuard,FonctionnaireGuard,AdminGuard] },
+  { path: 'appointments/view/:id', component: ViewComponent,canActivate: [AuthGuard,adminORfonctGuardGuard] },
   { path: 'electoralparties', component: ElectoralPartyComponent },
   { path: 'electoralparties/add', component: AddElectoralPartyComponent,canActivate: [AuthGuard,AdminGuard] },
   { path: 'electoralparties/details/:id', component: DetailsElectoralPartyComponent },

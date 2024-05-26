@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { VoteService } from '../../services/vote.service';
-import { ElectoralParty } from '../../model/ElectoralParty.model';
+import {Component, OnInit} from '@angular/core';
+import {ElectoralParty} from "../../model/ElectoralParty.model";
+import {VoteService} from "../../services/vote.service";
 
 @Component({
   selector: 'app-home',
@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
     this.voteService.getWinningParty().subscribe((data:any)=>{
       this.electroParty=data;
     });
-    this.getVotingState();
     this.getVotingEnded();
     this.startAutoRefresh();
   }
+
 
 
   getVotingEnded():boolean{
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   }
   getVotingState(): boolean {
     return this.voteService.getVotingState();
+
 
 }
 
@@ -61,18 +62,13 @@ private refreshVotingStatus(): void {
   const votingEnded = this.voteService.getVotingEnded();
   if (votingEnded) {
     // Voting has ended, update UI accordingly
-    this.displayWinningParty();
+    this.getVotingState();
     // Stop auto-refresh as voting has ended
     this.stopAutoRefresh();
   }
   // Update other UI elements based on voting status as needed
 }
 
-private displayWinningParty(): void {
-  // Logic to display winning party or other relevant information
-  this.voteService.getWinningParty().subscribe((electoralParties) => {
-    // Update UI to display winning party
-    this.electoralParties = electoralParties;
-  });
-}
+
+
 }

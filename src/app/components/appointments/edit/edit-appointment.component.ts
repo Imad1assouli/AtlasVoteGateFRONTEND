@@ -8,7 +8,6 @@ import { ConfirmationDialogComponent } from '../dialog/confirmation-dialog/confi
 @Component({
   selector: 'app-edit-appointment',
   templateUrl: './edit-appointment.component.html',
-  styleUrls: ['./edit-appointment.component.css']
 })
 
 export class EditAppointmentComponent implements OnInit {
@@ -21,7 +20,7 @@ export class EditAppointmentComponent implements OnInit {
     private dialog: MatDialog,
     private appointmentService: AppointmentService
   ) {}
-  
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id =  this.route.snapshot.params['id'];

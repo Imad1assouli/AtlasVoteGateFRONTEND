@@ -1,14 +1,24 @@
-<div *ngIf="appointment">
-    <h2>Appointment Details</h2>
-    <p><strong>ID:</strong> {{ appointment.id }}</p>
-    <p><strong>Last Name:</strong> {{ appointment.nom }}</p>
-    <p><strong>First Name:</strong> {{ appointment.prenom }}</p>
-    <p><strong>Email:</strong> {{ appointment.email }}</p>
-    <p><strong>Appointment Time:</strong> {{ appointment.appointmentTime }}</p>
-    <p><strong>Appointment Status:</strong> {{ appointment.status }}</p>
-             <button class="btn btn-info" (click)="editAppointment(appointment.id)">Update</button>
-            <button class="btn btn-danger" style="margin-left: 10px;" (click)="cancelAppointment(appointment.id)">Cancel</button>
-            <button class="btn btn-info" (click)="viewAppointment(appointment.id)">Back</button>
-            <button class="btn btn-info" (click)="verifyAppointment(appointment.id)">Verify</button>
-  </div>
-  
+<nb-layout>
+  <nb-layout-header fixed></nb-layout-header>
+  <nb-layout-column>
+    <div *ngIf="appointment" class="appointment-details card">
+      <div class="card-header">
+        <h2>Appointment Details</h2>
+      </div>
+      <div class="card-body">
+        <p><strong>ID:</strong> {{ appointment.id }}</p>
+        <p><strong>Last Name:</strong> {{ appointment.nom }}</p>
+        <p><strong>First Name:</strong> {{ appointment.prenom }}</p>
+        <p><strong>Email:</strong> {{ appointment.email }}</p>
+        <p><strong>Appointment Time:</strong> {{ appointment.appointmentTime }}</p>
+        <p><strong>Appointment Status:</strong> {{ appointment.status }}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-info" (click)="editAppointment(appointment.id)">Update</button>
+        <button class="btn btn-danger" (click)="cancelAppointment(appointment.id)">Cancel</button>
+        <button class="btn btn-info" (click)="viewAppointment(appointment.id)">Back</button>
+        <button class="btn btn-info" (click)="verifyAppointment(appointment.id)">Verify</button>
+      </div>
+    </div>
+  </nb-layout-column>
+</nb-layout>

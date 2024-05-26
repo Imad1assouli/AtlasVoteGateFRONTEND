@@ -1,18 +1,37 @@
-<div class="details-electoral-party-container">
-  <h2>Electoral Party Details</h2>
-  <div class="party-details">
-    <h3>{{ party.name }}</h3>
-    <p>{{ party.description }}</p>
-    <button *ngIf="isUserAdmin()" class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
 
-    <button *ngIf="votingStarted && !(userHasVoted$ | async) && isUserVoteur() && !getVotingEnded() " class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Electoral Party Details</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./details-electoralparty.component.css">
+</head>
+<body>
+<nb-layout>
+  <nb-layout-header fixed>
+  </nb-layout-header>
 
-    <div *ngIf="!votingStarted" class="alert alert-warning">
-      <p><strong>Voting has not started yet.</strong></p>
+  <nb-layout-column>
+    <div class="details-electoral-party-container">
+      <h2>Electoral Party Details</h2>
+      <div class="party-details">
+        <h3>{{ party.name }}</h3>
+        <p>{{ party.description }}</p>
+        <button *ngIf="isUserAdmin()" class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
+        <button *ngIf="votingStarted && !(userHasVoted$ | async) && isUserVoteur() && !getVotingEnded()" class="btn btn-vote" (click)="vote(user.id, party.id)">Vote</button>
+
+        <div *ngIf="!votingStarted" class="alert alert-warning">
+          <p><strong>Voting has not started yet.</strong></p>
+        </div>
+
+        <div *ngIf="votingStarted && (userHasVoted$ | async) && isUserVoteur()" class="alert alert-success">
+          <p><strong>You have already voted</strong></p>
+        </div>
+      </div>
     </div>
+  </nb-layout-column>
+</nb-layout>
+</body>
+</html>
 
-    <div *ngIf="votingStarted && (userHasVoted$ | async) && isUserVoteur()" class="alert alert-success">
-      <p><strong>You have already voted</strong></p>
-    </div>
-  </div>
-</div>

@@ -1,49 +1,102 @@
-/* utilisateurs.component.css */
-.users-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 20px auto;
+.breadcrumb-section {
   padding: 20px;
-  text-align: center;
-}
-
-.users-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.users-table th, .users-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.users-table th {
   background-color: #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.btn {
-  padding: 6px 12px;
-  margin: 4px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.breadcrumbs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+.breadcrumbs li {
+  margin-right: 10px;
+}
+
+.breadcrumbs a {
+  color: #007bff;
+  text-decoration: none;
 }
 
 .btn-add {
-  background-color: #4CAF50;
+  background-color: #28a745;
   color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.user-management {
+  padding: 20px;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.user-card {
+  background: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex: 1 1 300px;
+}
+
+.user-card h2 {
+  margin: 0;
+  color: #333;
+}
+
+.user-details {
+  margin-top: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.user-info i {
+  margin-right: 5px;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .btn-edit {
-  background-color: #2196F3;
+  background-color: #007bff;
   color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .btn-delete {
-  background-color: #f44336;
+  background-color: #dc3545;
   color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.btn:hover {
-  opacity: 0.8;
+body {
+  font-family: 'Raleway', sans-serif;
 }
