@@ -1,16 +1,53 @@
-<div>
-  <h2>Vote Panel</h2>
-  <div *ngIf="!votingStarted">
-    <button (click)="startVotingProcess()">Start Voting</button>
-  </div>
-  <div *ngIf="votingStarted || votingStarted === undefined">
-    <button *ngIf="votingStarted" (click)="endVote()">Clear Voting Start Time</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vote Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vote.component.css">
+</head>
+<body>
+<nb-layout>
+  <nb-layout-header fixed>
+  </nb-layout-header>
 
-    <p *ngIf="votingStartTime">Voting Started At: {{ votingStartTime | date }}</p>
-    <p *ngIf="votingEndTime">Voting Ends At: {{ votingEndTime | date }}</p>
-    <div *ngIf="votingStarted">
-      <p *ngIf="remainingTime > 0">Time remaining: {{ remainingTime | date:'HH:mm:ss' }}</p>
-      <p *ngIf="remainingTime <= 0">Voting period has ended.</p>
+  <nb-layout-column>
+    <div class="breadcrumb-section">
+      <ul class="breadcrumbs">
+        <li>
+          <a>AtlasVoteGate</a>
+        </li>
+        <li>
+          <i class="pi pi-angle-right"></i>
+        </li>
+        <li>
+          <span>Vote Panel</span>
+        </li>
+      </ul>
     </div>
-  </div>
-</div>
+
+    <div class="vote-panel card">
+      <div class="card-header">
+        <h2>Vote Panel</h2>
+      </div>
+      <div class="card-body">
+        <div *ngIf="!votingStarted">
+          <p-button type="button" label="Start Voting" icon="pi pi-play" class="btn-start" (click)="startVotingProcess()"></p-button>
+        </div>
+        <div *ngIf="votingStarted || votingStarted === undefined">
+          <p-button *ngIf="votingStarted" type="button" label="Clear Voting Start Time" icon="pi pi-times" class="btn-end" (click)="endVote()"></p-button>
+          <br>
+          <br>
+          <p *ngIf="votingStartTime">Voting Started At: {{ votingStartTime | date }}</p>
+          <p *ngIf="votingEndTime">Voting Ends At: {{ votingEndTime | date }}</p>
+          <div *ngIf="votingStarted">
+            <p *ngIf="remainingTime > 0">Time remaining: {{ remainingTime | date:'HH:mm:ss' }}</p>
+            <p *ngIf="remainingTime <= 0">Voting period has ended.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-layout-column>
+</nb-layout>
+</body>
+</html>

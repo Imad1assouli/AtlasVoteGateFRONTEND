@@ -7,7 +7,6 @@ import {ElectoralParty} from "../../../model/ElectoralParty.model";
 @Component({
   selector: 'app-add-electoral-party',
   templateUrl: './add-electoralparty.component.html',
-  styleUrls: ['./add-electoralparty.component.css']
 })
 export class AddElectoralPartyComponent implements OnInit {
   addElectoralParty: FormGroup;

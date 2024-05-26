@@ -1,33 +1,49 @@
-<!-- appointment.component.html -->
-<div class="app-container">
-  <h1>Appointments</h1>
-  <button *ngIf="isUserAdmin()" class="btn btn-add" (click)="addAppointment()">Add Appointment</button>
-  <div *ngIf="appointments.length; else noAppointments">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prenom</th>
-          <th>CNE</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let appointment of appointments">
-          <td>{{ appointment.nom }}</td>
-          <td>{{ appointment.prenom }}</td>
-          <td>{{ appointment.cne }}</td>
-          <td>
-            <button class="btn btn-info" (click)="editAppointment(appointment.id)">Update</button>
-            <button class="btn btn-danger" style="margin-left: 10px;" (click)="cancelAppointment(appointment.id)">Cancel</button>
-            <button class="btn btn-info" (click)="viewAppointment(appointment.id)">View</button>
-            <button class="btn btn-info" (click)="verifyAppointment(appointment.id)">Verify</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <ng-template #noAppointments>
-    <p>No appointments found.</p>
-  </ng-template>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AtlasVoteGate</title>
+  <link rel="stylesheet" href="./appointment.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<nb-layout>
+  <nb-layout-header fixed>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <div class="breadcrumb-section">
+      <ul class="breadcrumbs">
+        <li>
+          <a>AtlasVoteGate</a>
+        </li>
+        <li>
+          <i class="pi pi-angle-right"></i>
+        </li>
+        <li>
+          <span>Appointments</span>
+        </li>
+      </ul>
+      <button *ngIf="isUserAdmin()" (click)="addAppointment()" class="btn-add">Add Appointment</button>
+    </div>
+
+    <div class="appointment-list">
+      <div *ngFor="let appointment of appointments" class="appointment-card">
+        <h2>{{appointment.nom}} {{appointment.prenom}}</h2>
+        <div class="actions">
+          <button (click)="viewAppointment(appointment.id)">View</button>
+          <button (click)="editAppointment(appointment.id)">Edit</button>
+          <button (click)="cancelAppointment(appointment.id)">Cancel</button>
+          <button (click)="verifyAppointment(appointment.id)">Verify</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noAppointments>
+      <p>No appointments found.</p>
+    </ng-template>
+  </nb-layout-column>
+</nb-layout>
+</body>
+</html>

@@ -23,21 +23,17 @@ export class AddAppointmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-   } 
-    
+
+   }
+
   onSubmit(): void {
       this.appointmentService.addAppointment(this.appointment).subscribe({
         next: () => {
-          this.goToAppointmentsForToday();
+          this.router.navigate(['/']);
         },
         error: (err: any) => {
           console.error('Error during add appointment :', err);
         }
       });
     }
-    goToAppointmentsForToday(){
-      this.router.navigate(["/appointments"]);  
-    }
-  
 }

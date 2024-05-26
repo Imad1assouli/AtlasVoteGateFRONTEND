@@ -1,13 +1,16 @@
-<nav class="navbar">
-  <a class="navbar-link" routerLink="/home">Home</a>
-  <a *ngIf="isUserAdmin()" class="navbar-link" routerLink="/utilisateurs">Users</a>
-  <a class="navbar-link" routerLink="/electoralparties">Electoral Parties</a>
-  <a *ngIf="isUserAdmin() || isUserOfficial()" class="navbar-link" routerLink="/appointments">Appointments</a>
-  <a *ngIf="!(isLoggedIn() | async)" class="navbar-link" routerLink="/signup">Sign Up</a>
-  <a *ngIf="!(isLoggedIn() | async)" class="navbar-link" routerLink="/login">Login</a>
-  <a *ngIf="isUserAdmin()" class="navbar-link" routerLink="/vote">Vote</a>
-  <a *ngIf="(isLoggedIn() | async)" (click)="logout()" class="navbar-link" routerLink="/logout">Logout</a>
-</nav>
-<div class="content">
-  <router-outlet></router-outlet>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AtlasVoteGate</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng/resources/themes/saga-blue/theme.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng/resources/primeng.min.css">
+  <link rel="stylesheet" href="./app.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+</body>
+</html>

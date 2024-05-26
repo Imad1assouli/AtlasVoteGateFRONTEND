@@ -18,12 +18,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserModule } from '@angular/platform-browser';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
 import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './components/appointments/dialog/confirmation-dialog/confirmation-dialog.component';
 import { ViewComponent } from './components/appointments/view/view.component';
 import { EditElectoralPartyComponent } from './components/electoralparties/edit/edit-electoralparty.component';
 import { EditComponent } from './components/utilisateurs/edit/edit.component';
 import { VoteComponent } from './components/vote/vote.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NbCardModule, NbDatepickerModule, NbThemeModule } from '@nebular/theme';
 
 
 @NgModule({
@@ -44,22 +46,35 @@ import { VoteComponent } from './components/vote/vote.component';
     ConfirmationDialogComponent,
     ViewComponent,
     EditComponent,
-    VoteComponent,
-    
-
-  
+    NavbarComponent,
+    VoteComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        ButtonModule,
+        CardModule,
+        RippleModule,
+        InputTextModule,
+        MessageModule,
+        BreadcrumbModule,
+        NbThemeModule.forRoot({name: 'default'}),
+        NbEvaIconsModule,
+        NbDatepickerModule.forRoot(),
+        NbCardModule,
+        NbInputModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatDividerModule,
+        MatListModule,
+        MatDialogModule,
+        NbLayoutModule
+    ],
   providers: [
-    provideAnimationsAsync(),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]

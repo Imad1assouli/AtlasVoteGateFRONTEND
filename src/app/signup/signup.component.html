@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Sign Up</title>
+  <title>Connexion</title>
   <link rel="stylesheet" href="./signup.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="signup-container">
-  <h1>Sign Up</h1>
-  <form (ngSubmit)="onSubmit()"  #appointmentForm="ngForm">
-    <div class="form-field">
-      <label for="nom">Last Name:</label>
-      <input type="text" id="nom" name="nom" placeholder="Enter last name" [(ngModel)]="appointment.nom" required>
-    </div>
-    <div class="form-field">
-      <label for="prenom">First Name:</label>
-      <input type="text" id="prenom" name="prenom" placeholder="Enter first name" [(ngModel)]="appointment.prenom" required>
-    </div>
-    <div class="form-field">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Enter email" [(ngModel)]="appointment.email" required>
-    </div>
-    <div class="form-field">
-      <label for="appointment">Appointment Date:</label>
-      <input type="datetime-local" id="appointment" name="appointment" [(ngModel)]="appointment.appointmentTime" required>
-    </div>
-    <div class="form-field">
-      <label for="cne">CNE:</label>
-      <input type="text" id="cne" name="cne" placeholder="Enter CNE" [(ngModel)]="appointment.cne" required>
-    </div>
-    <div class="form-field">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="appointment.password" required>
-    </div>
-    <button type="submit" class="btn btn-signup" [disabled]="!appointmentForm.valid">Sign Up</button>
-  </form>
+<div class="surface-card">
+  <div class="header">
+    <h1>Create your Account</h1>
+    <p>Already have an account? <a href="/login">Login here!</a></p>
+  </div>
+  <div class="card">
+    <form (ngSubmit)="onSubmit()" #appointmentForm="ngForm">
+      <div class="form-group">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" placeholder="Enter your name" [(ngModel)]="appointment.nom" required>
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" placeholder="Enter your first name" [(ngModel)]="appointment.prenom" required>
+      </div>
+      <div class="form-group">
+        <label for="cni">CNI:</label>
+        <input type="text" id="cni" name="cni" placeholder="Enter your CNI" [(ngModel)]="appointment.cne" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" [(ngModel)]="appointment.email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" [(ngModel)]="appointment.password" required>
+      </div>
+      <div class="form-group">
+        <label for="appointment">Date de Rendez-Vous:</label>
+        <input type="datetime-local" id="appointment" name="appointment" [(ngModel)]="appointment.appointmentTime" required>
+      </div>
+      <button type="submit" class="btn btn-signup">SignUp</button>
+    </form>
+  </div>
 </div>
 </body>
 </html>

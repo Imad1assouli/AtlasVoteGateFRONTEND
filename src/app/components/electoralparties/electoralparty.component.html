@@ -1,17 +1,50 @@
-<!-- electoralparty.component.html -->
-<div class="electoral-party-container">
-  <h1>Electoral Parties</h1>
-  <button *ngIf="isUserAdmin()" class="btn btn-add" (click)="addElectoralParty()">Add Electoral Party</button>
-  
-  <div *ngIf="votingStarted && (userHasVoted$ | async)" class="alert alert-success">
-    <p><strong>You have already voted</strong></p>
-  </div>
-  
-  <ul class="electoral-party-list">
-    <li *ngFor="let party of parties">
-      {{ party.name }}
-      <button class="btn btn-details" (click)="viewElectoralPartyDetails(party.id)">Details</button>
-      <button *ngIf="isUserAdmin()" class="btn btn-edit" (click)="editElectoralParty(party.id)">Edit</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electoral Parties</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng/resources/themes/saga-blue/theme.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng/resources/primeng.min.css">
+  <link rel="stylesheet" href="./electoralparty.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="breadcrumb-section">
+  <ul class="breadcrumbs">
+    <li>
+      <a>AtlasVoteGate</a>
+    </li>
+    <li>
+      <i class="pi pi-angle-right"></i>
+    </li>
+    <li>
+      <span>Electoral Parties</span>
     </li>
   </ul>
+  <p-button *ngIf="isUserAdmin()" type="button" label="Add Party" icon="pi pi-plus" class="btn-add" (click)="addElectoralParty()"></p-button>
 </div>
+
+<div class="electoral-parties-container card">
+  <div class="card-header">
+    <h2>Electoral Parties</h2>
+  </div>
+  <div class="card-body">
+    <p-message *ngIf="votingStarted && (userHasVoted$ | async)" severity="success" text="You have already voted"></p-message>
+
+    <ul class="electoral-party-list">
+      <li *ngFor="let party of parties" class="party-item">
+        <div class="party-details">
+          <h3>{{ party.name }}</h3>
+          <p class="party-description">{{ party.description }}</p>
+        </div>
+        <div class="party-actions">
+          <p-button type="button" label="Details" icon="pi pi-info-circle" class="btn-details" (click)="viewElectoralPartyDetails(party.id)"></p-button>
+          <p-button *ngIf="isUserAdmin()" type="button" label="Edit" icon="pi pi-pencil" class="btn-edit" (click)="editElectoralParty(party.id)"></p-button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
