@@ -6,7 +6,7 @@
     <p>{{ party.description }}</p>
     <button *ngIf="isUserAdmin()" class="btn btn-delete" (click)="onDelete(party.id)">Delete</button>
 
-    <button *ngIf="!(userHasVoted$ | async) && isUserVoteur()" class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
+    <button *ngIf="!(userHasVoted$ | async) && isUserVoteur() && !getVotingEnded()" class="btn btn-delete" (click)="vote(user.id, party.id)">Vote</button>
 
     <div *ngIf="(userHasVoted$ | async) && isUserVoteur()" class="alert alert-success">
       <p><strong>You have already voted</strong></p>

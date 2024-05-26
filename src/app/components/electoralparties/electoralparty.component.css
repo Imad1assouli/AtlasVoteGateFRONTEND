@@ -54,7 +54,7 @@
   padding: 15px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgb(255, 255, 255);
 }
 
 .electoral-party-list {
@@ -106,13 +106,12 @@
 body {
   font-family: 'Raleway', sans-serif;
 }
-.btn-details-custom {
-  background-color: #17a2b8;
+
+.btn-add {
+  background-color: #28a745;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
 }
-
-

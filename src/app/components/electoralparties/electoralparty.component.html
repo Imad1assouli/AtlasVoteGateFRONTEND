@@ -22,7 +22,7 @@
       <span>Electoral Parties</span>
     </li>
   </ul>
-  <p-button *ngIf="isUserAdmin()" type="button" label="Add Party" icon="pi pi-plus" class="btn-add" (click)="addElectoralParty()"></p-button>
+  <button *ngIf="isUserAdmin()" type="button" class="btn-add" (click)="addElectoralParty()">Add Party</button>
 </div>
 
 <div class="electoral-parties-container card">
@@ -39,10 +39,9 @@
           <p class="party-description">{{ party.description }}</p>
         </div>
         <div class="party-actions">
-          <p-button type="button" label="Details" icon="pi pi-info-circle" class="btn-details btn-details-custom" (click)="viewElectoralPartyDetails(party.id)"></p-button>
-          <button *ngIf="isUserAdmin()" type="button" label="Edit" icon="pi pi-pencil" class="btn-edit" (click)="editElectoralParty(party.id)"></button>
+          <button type="button"  class="btn-add" (click)="viewElectoralPartyDetails(party.id)">Details</button>
+          <button *ngIf="isUserAdmin()" type="button" class="btn-edit" (click)="editElectoralParty(party.id)">Edit</button>
         </div>
-
       </li>
     </ul>
   </div>
