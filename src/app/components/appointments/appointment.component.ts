@@ -26,7 +26,7 @@ export class AppointmentComponent implements OnInit  {
 
   ngOnInit(): void {
     this.getAllAppointmentsForToday();
-  
+
   }
 
   getAllAppointmentsForToday() {
@@ -40,19 +40,19 @@ export class AppointmentComponent implements OnInit  {
     );
   }
   onSubmit(): void {
-    
+
   }
 
-  
+
   editAppointment(id:number){
-    this.router.navigate(["/appointments/edit",id]); 
+    this.router.navigate(["/appointments/edit",id]);
 
   }
   viewAppointment(id:number){
-    this.router.navigate(["/appointments/view",id]); 
+    this.router.navigate(["/appointments/view",id]);
 
   }
-  
+
   verifyAppointment(id: number) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: { message: 'Are you sure you want to verify this appointment?' }
@@ -64,16 +64,16 @@ export class AppointmentComponent implements OnInit  {
           (data) => {
             console.log('Appointment verified successfully:', data);
             this.getAllAppointmentsForToday();
-          
+
           },
           (error) => {
             console.error('Error ', error);
-          
+
           }
         );
       }
     });
-    
+
   }
   cancelAppointment(id: number) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -92,13 +92,13 @@ export class AppointmentComponent implements OnInit  {
         });
       }
     });
-    
+
   }
     goToAppointmentsForToday(){
-      this.router.navigate(["/appointments"]);  
+      this.router.navigate(["/appointments"]);
     }
   addAppointment(){
-    this.router.navigate(["/appointments/add"]); 
+    this.router.navigate(["/appointments/add"]);
   }
 
   // Other methods like editAppointment, viewAppointment, verifyAppointment, etc. remain the same

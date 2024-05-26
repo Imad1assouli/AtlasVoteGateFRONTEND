@@ -9,7 +9,6 @@ import { ConfirmationDialogComponent } from '../appointments/dialog/confirmation
 @Component({
   selector: 'app-utilisateurs',
   templateUrl: './utilisateur.component.html',
-  styleUrls: ['./utilisateur.component.css']
 })
 export class UtilisateurComponent implements OnInit  {
 onUpdate(id: number) {
@@ -37,7 +36,7 @@ onUpdate(id: number) {
         console.error('Error fetching appointments:', error);
       }
     );  }
-  
+
   onDelete(id:number){
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: { message: 'Are you sure you want to update this user ?' }
@@ -57,7 +56,7 @@ onUpdate(id: number) {
       }
     });
   }
-  
+
   addUtilisateur() {
     this.router.navigate(['/utilisateurs/add']);
   }

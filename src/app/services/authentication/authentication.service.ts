@@ -35,7 +35,7 @@ export class AuthenticationService {
       })
     );
   }
-  
+
 
   logout(): void {
     localStorage.removeItem('jwttoken');
