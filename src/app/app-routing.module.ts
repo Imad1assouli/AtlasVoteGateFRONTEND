@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'appointments', component: AppointmentComponent ,canActivate: [FonctionnaireGuard,AdminGuard]},
+  { path: 'appointments', component: AppointmentComponent ,canActivate: [AdminGuard]},
   { path: 'appointments/add', component: AddAppointmentComponent,canActivate: [AdminGuard] }, // Route for adding appointments
   { path: 'appointments/edit/:id', component: EditAppointmentComponent,canActivate: [AuthGuard,AdminGuard] },
   { path: 'appointments/view/:id', component: ViewComponent,canActivate: [AuthGuard,FonctionnaireGuard,AdminGuard] },
