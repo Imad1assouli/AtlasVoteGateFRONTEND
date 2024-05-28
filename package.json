@@ -30,8 +30,7 @@
     "framer-motion": "^11.1.9",
     "huge": "^0.1.0",
     "icons": "^1.0.0",
-    "ng-bootstrap": "^1.1.16",
-
+    "ng-bootstrap": "^0.46.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.17.0",
