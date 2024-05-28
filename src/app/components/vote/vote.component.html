@@ -32,10 +32,10 @@
       </div>
       <div class="card-body">
         <div *ngIf="!votingStarted">
-          <p-button type="button" label="Start Voting" icon="pi pi-play" class="btn-start" (click)="startVotingProcess()"></p-button>
+          <button type="button" class="btn-start" (click)="startVotingProcess()">Start Voting</button>
         </div>
         <div *ngIf="votingStarted || votingStarted === undefined">
-          <p-button *ngIf="votingStarted" type="button" label="Clear Voting Start Time" icon="pi pi-times" class="btn-end" (click)="endVote()"></p-button>
+          <button *ngIf="votingStarted" type="button" class="btn-end" (click)="endVote()">Clear Voting Start Time</button>
           <br>
           <br>
           <p *ngIf="votingStartTime">Voting Started At: {{ votingStartTime | date }}</p>
