@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./src:/app/src
+      - ./angular.json:/app/angular.json
+      - ./package.json:/app/package.json
+      # Add any other volumes you might need
